@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { FaSearch, FaCertificate, FaUser, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaDownload, FaPrint, FaUserShield } from 'react-icons/fa';
 import html2canvas from 'html2canvas';
-
+import jsPDF from 'jspdf';
 import './CertificateVerification.css';
 
 const CertificateVerification = () => {
@@ -38,18 +38,18 @@ const CertificateVerification = () => {
   };
 
   const handleDownload = () => {
-    // if (!certificateRef.current) return;
+    if (!certificateRef.current) return;
 
-    // html2canvas(certificateRef.current).then(canvas => {
-    //   const imgData = canvas.toDataURL('image/png');
-    //   // const pdf = new jsPDF('landscape');
-    //   const imgProps = pdf.getImageProperties(imgData);
-    //   const pdfWidth = pdf.internal.pageSize.getWidth();
-    //   const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    html2canvas(certificateRef.current).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('landscape');
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       
-    //   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    //   pdf.save(`${verificationResult.certificateNumber}.pdf`);
-    // });
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`${verificationResult.certificateNumber}.pdf`);
+    });
   };
 
   const handlePrint = () => {
@@ -145,92 +145,7 @@ const CertificateVerification = () => {
           </div>
 
           {/* Results Section */}
-          {verificationResult && (
-            <div className={`result-section ${verificationResult.isValid ? 'valid' : 'invalid'}`}>
-              <div className="result-header">
-                {verificationResult.isValid ? (
-                  <FaCheckCircle className="status-icon valid" />
-                ) : (
-                  <FaTimesCircle className="status-icon invalid" />
-                )}
-                <h3>
-                  {verificationResult.isValid 
-                    ? 'Valid Certificate Verified' 
-                    : 'Certificate Not Valid'}
-                </h3>
-                <span className="verified-by">Verified by: {verificationResult.username}</span>
-              </div>
-
-              <div className="certificate-display">
-                <div className="certificate-image-container" ref={certificateRef}>
-                  <img 
-                    src={verificationResult.certificateImage} 
-                    alt="Certificate Preview" 
-                    className="certificate-image"
-                  />
-                  <div className="certificate-overlay">
-                    <button className="action-btn" onClick={handleDownload}>
-                      <FaDownload /> Download
-                    </button>
-                    <button className="action-btn" onClick={handlePrint}>
-                      <FaPrint /> Print
-                    </button>
-                  </div>
-                  <div className="certificate-details-overlay">
-                    <div className="detail-overlay">
-                      <span>Certificate ID: {verificationResult.certificateNumber}</span>
-                      <span>Holder: {verificationResult.holderName}</span>
-                      <span>Course: {verificationResult.courseName}</span>
-                      <span>Issued: {verificationResult.issueDate}</span>
-                      <span>Expires: {verificationResult.expiryDate}</span>
-                    </div>
-                    <div className="qr-overlay">
-                      <img src={verificationResult.qrCode} alt="QR Code" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="certificate-details">
-                  <div className="detail-row">
-                    <FaUser className="detail-icon" />
-                    <div>
-                      <label>Certificate Holder</label>
-                      <p>{verificationResult.holderName}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="detail-row">
-                    <FaCertificate className="detail-icon" />
-                    <div>
-                      <label>Course Name</label>
-                      <p>{verificationResult.courseName}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="detail-row">
-                    <FaCalendarAlt className="detail-icon" />
-                    <div>
-                      <label>Issue Date</label>
-                      <p>{verificationResult.issueDate}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="detail-row">
-                    <FaCalendarAlt className="detail-icon" />
-                    <div>
-                      <label>Expiry Date</label>
-                      <p>{verificationResult.expiryDate}</p>
-                    </div>
-                  </div>
-
-                  <div className="qr-code">
-                    <img src={verificationResult.qrCode} alt="Verification QR Code" />
-                    <p>Scan to verify</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+   
         </div>
       </div>
 

@@ -6,20 +6,24 @@ import AboutUs from './pages/AboutUs';
 import Verification from './pages/Verification';
 // import Qualifications from './pages/Qualifications';
 // import ATP from './pages/ATP';
-// import ATPLogin from './pages/ATPLogin';
+import Atp from './pages/Atp';
+import Register from './pages/Register';
+import QualificationsPage from './pages/QualificationsPage';
 
 function App() {
   return (
     <Router>
       {/* <Header /> */}
       <Routes>
+        <Route path="/atp" element={<Atp />} />
+
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/verify" element={<Verification />} />
-        {/* <Route path="/qualifications" element={<Qualifications />} />
-        <Route path="/atp" element={<ATP />} />
-        <Route path="/atp-login" element={<ATPLogin />} /> */}
+        <Route path="/Register" element={<Register />} />
+
+        <Route path="/qualifications" element={<QualificationsPage />} />
       </Routes>
     </Router>
   );
