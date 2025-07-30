@@ -3,7 +3,7 @@ import './FAQs.css';
 
 const faqs = [
   {
-    question: 'What is OSHAS?',
+    question: 'What is OSHEQ?',
     answer: 'A website that provides resources and training courses for workplace safety and Occupational Safety and Health American Society regulations.'
   },
   {

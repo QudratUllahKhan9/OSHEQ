@@ -15,9 +15,9 @@ export default function Header() {
       <div className="contact-bar">
         <div className="container">
           <div className="contact-info">
-            <a href="mailto:info@oshas.us">
+            <a href="mailto:info@osheq.us">
               <FaEnvelope className="icon" />
-              <span>info@oshas.us</span>
+              <span>info@osheq.us</span>
             </a>
             <a href="tel:+13022041194">
               <FaPhone className="icon" />

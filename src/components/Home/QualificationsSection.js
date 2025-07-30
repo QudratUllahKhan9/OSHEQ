@@ -9,33 +9,33 @@ import img6 from '../Home/assets/qualification_6.webp'
 
 const qualifications = [
   {
-    title: "OSHAS 10 Hours",
+    title: "OSHEQ 10 Hours",
     desc: "General Industry Standards",
     img: img1,
   },
   {
-    title: "OSHAS 30 Hours",
+    title: "OSHEQ 30 Hours",
     desc: "General Industry Standards",
       img: img2,
   },
   {
-    title: "OSHAS 48 Hours",
+    title: "OSHEQ 48 Hours",
     desc: "OSH Manager Training",
     img: img3,
   },
   {
-    title: "OSHAS 56 Hours",
+    title: "OSHEQ 56 Hours",
     desc: "Train the Trainer",
       img: img4,
   },
   {
-    title: "OSHAS 132 Hours",
+    title: "OSHEQ 132 Hours",
     desc: "OSH Professional",
      img: img5,
   },
   {
     title: "10-Hour General Industry",
-    desc: "OSHA Training Qualification",
+    desc: "OSHEQ Training Qualification",
     img: img6,
   },
 ];

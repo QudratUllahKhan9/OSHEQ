@@ -184,9 +184,9 @@ const Qualifications = () => {
     },
     {
       id: 'membership',
-      title: 'OSHAS Membership',
+      title: 'OSHEQ Membership',
       courses: [
-        'Chartered Member (CM-OSHAS)'
+        'Chartered Member (CM-OSHEQ)'
       ]
     },
     {
@@ -237,7 +237,7 @@ const Qualifications = () => {
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <FaGraduationCap className="hero-icon" />
-          <h1>OSHAS Training Courses</h1>
+          <h1>OSHEQ Training Courses</h1>
           <p>Comprehensive safety qualifications for all industries</p>
         </div>
       </div>
@@ -247,7 +247,7 @@ const Qualifications = () => {
         <div className="intro-section">
           <h2>Our Training Programs</h2>
           <p>
-            OSHAS offers different qualifications with the objective of educating personnel in the public and private sectors about workplace safety and health and lowering incident rates for workers. Occupational safety and health standards, safety and health management, incident investigation, fall hazard awareness, Environmental Management, First Aid & CPR, Fire safety, HAZWOPER and recordkeeping are just a few of the topics from which participants can select. These courses are offered at OSHAS Approved Training Centers around the globe.
+            OSHEQ offers different qualifications with the objective of educating personnel in the public and private sectors about workplace safety and health and lowering incident rates for workers. Occupational safety and health standards, safety and health management, incident investigation, fall hazard awareness, Environmental Management, First Aid & CPR, Fire safety, HAZWOPER and recordkeeping are just a few of the topics from which participants can select. These courses are offered at OSHEQ Approved Training Centers around the globe.
           </p>
         </div>
 
@@ -279,7 +279,7 @@ const Qualifications = () => {
         </div>
 
         <div className="benefits-section">
-          <h2>Why Choose OSHAS Training?</h2>
+          <h2>Why Choose OSHEQ Training?</h2>
           <div className="benefits-grid">
             <div className="benefit-card">
               <div className="benefit-icon">
@@ -307,7 +307,7 @@ const Qualifications = () => {
       </div>
 
       {/* <div className="qualifications-footer">
-        <p>© {new Date().getFullYear()} OSHAS. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} . All rights reserved.</p>
       </div> */}
     </div>
   );

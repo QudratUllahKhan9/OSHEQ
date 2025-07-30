@@ -20,7 +20,8 @@
 }
 
 .footer-logo {
-  width: 140px;
+  width: 40vh;
+  filter: brightness(0) invert(1);
   margin-bottom: 10px;
 }
 

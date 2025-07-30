@@ -4,9 +4,7 @@
 .certificate-verification-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-  /* max-width: 1200px; */
   margin: 0 auto;
-
 }
 
 /* Hero Section */
@@ -143,7 +141,7 @@
 }
 
 .verify-btn {
-  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  background: #003366;
   color: white;
   border: none;
   padding: 15px 25px;
@@ -160,7 +158,7 @@
 }
 
 .verify-btn:hover {
-  background: linear-gradient(to right, #3a41b8, #7a80e8);
+  background: #003366;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
 }
@@ -231,6 +229,7 @@
   display: flex;
   gap: 40px;
   margin-bottom: 30px;
+  min-height: 60vh;
 }
 
 .certificate-image-container {
@@ -238,19 +237,57 @@
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  min-height: 350px;
+  min-height: 400px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
 }
 
-.certificate-image {
+.pdf-viewer {
+  width: 100%;
+  flex-grow: 1;
+  border: none;
+  min-height: 500px;
+}
+
+.certificate-template {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+  padding: 40px;
+  background: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
 }
 
-.certificate-image-container:hover .certificate-image {
-  transform: scale(1.05);
+.certificate-template h3 {
+  color: #003366;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.certificate-template h2 {
+  color: #2c3e50;
+  font-size: 2.2rem;
+  margin: 15px 0;
+  padding: 10px 0;
+  border-top: 2px solid #4e54c8;
+  border-bottom: 2px solid #4e54c8;
+}
+
+.certificate-template p {
+  color: #555;
+  font-size: 1.1rem;
+  margin: 8px 0;
+}
+
+.certificate-qr {
+  margin-top: 30px;
+  width: 150px;
+  height: 150px;
 }
 
 .certificate-overlay {
@@ -360,10 +397,11 @@
 @media (max-width: 992px) {
   .certificate-display {
     flex-direction: column;
+    min-height: auto;
   }
   
   .certificate-image-container {
-    min-height: 250px;
+    min-height: 500px;
   }
   
   .qr-code {
@@ -391,6 +429,18 @@
   
   .verification-hero p {
     font-size: 1.1rem;
+  }
+  
+  .certificate-template {
+    padding: 30px 20px;
+  }
+  
+  .certificate-template h3 {
+    font-size: 1.5rem;
+  }
+  
+  .certificate-template h2 {
+    font-size: 1.8rem;
   }
 }
 

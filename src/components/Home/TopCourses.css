@@ -60,8 +60,8 @@ color: #003366;
 .view-btn {
   margin-top: auto;
   background-color: transparent;
-  color: #2563eb;
-  border: 1px solid #2563eb;
+  color: #003366;
+  border: 1px solid #003366;
   padding: 8px 14px;
   border-radius: 6px;
   font-weight: 500;
@@ -71,7 +71,7 @@ color: #003366;
 }
 
 .view-btn:hover {
-  background-color: #2563eb;
+  background-color: #003366;
   color: #ffffff;
 }
 

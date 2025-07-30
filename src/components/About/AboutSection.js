@@ -18,19 +18,45 @@ const AboutSection = () => {
   return (
     <div className="about-container">
       {/* Hero Section - Full Screen */}
-      <section className="fullscreen-section hero-section" id="hero">
-        <div className="hero-overlay"></div>
-        <div className="section-content">
-          <h1 data-aos="fade-down">About OSHEQ</h1>
-          <p data-aos="fade-up" data-aos-delay="200">
-            Committed to excellence in workplace safety, health, environment, and quality
-          </p>
-          <div className="scroll-indicator" data-aos="fade-up" data-aos-delay="400">
-            <FaChevronDown className="bounce-arrow" />
-          </div>
+  
+{/* Hero Section - Full Screen */}
+<section className="fullscreen-section hero-section">
+  <div className="section-content">
+    <div className="hero-text-container">
+      <h1 data-aos="fade-up">
+        <span className="hero-highlight">Redefining</span> Workplace Safety & Sustainability
+      </h1>
+      <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+        Where <span className="accent-text">safety protocols</span> meet <span className="accent-text">environmental stewardship</span> 
+        to create workplaces that thrive today and endure tomorrow.
+      </p>
+      
+      <div className="hero-features" data-aos="fade-up" data-aos-delay="400">
+        <div className="feature-item">
+          <FaShieldAlt className="feature-icon" />
+          <span>Certified Safety Experts</span>
         </div>
-      </section>
-
+        <div className="feature-item">
+          <FaLeaf className="feature-icon" />
+          <span>Sustainable Solutions</span>
+        </div>
+        <div className="feature-item">
+          <FaChartLine className="feature-icon" />
+          <span>Proven Results</span>
+        </div>
+      </div>
+      
+      <div className="hero-cta" data-aos="fade-up" data-aos-delay="600">
+        <button className="cta-primary">
+          Get Your Free Consultation
+        </button>
+        <button className="cta-secondary">
+          Learn About Our Approach <FaChevronDown />
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
       {/* Mission Section - Full Screen */}
       <section className="fullscreen-section mission-section" id="mission">
         <div className="section-content">

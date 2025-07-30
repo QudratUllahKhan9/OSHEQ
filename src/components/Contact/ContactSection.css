@@ -15,7 +15,7 @@
 /* Full-size Background Image Hero Section */
 .contact-hero {
   position: relative;
-  height: 100vh;
+  height: 60vh;
   background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') 
     no-repeat center center/cover;
   display: flex;
@@ -67,7 +67,7 @@
   padding: 80px 20px;
 }
 
-.contact-info {
+.contact-info-hello {
   flex: 1;
   min-width: 300px;
   padding: 0 20px;
@@ -160,7 +160,7 @@
 }
 
 .submit-btn {
-  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  background-color: #003366;
   color: white;
   border: none;
   padding: 12px 25px;
@@ -254,6 +254,18 @@
   .hero-content p {
     font-size: 1rem;
   }
+  .contact-hero {
+  position: relative;
+  height: 30vh;
+  background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') 
+    no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
 }
 
 @media (max-width: 480px) {

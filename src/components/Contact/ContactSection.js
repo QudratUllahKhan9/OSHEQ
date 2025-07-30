@@ -53,7 +53,7 @@ const ContactSection = () => {
 
       {/* Contact Content Section */}
       <div className="contact-content">
-        <div className="contact-info">
+        <div className="contact-info-hello">
           <div className="info-card animate-card">
             <div className="info-icon">
               <FaPhone />
