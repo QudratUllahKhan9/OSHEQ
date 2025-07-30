@@ -1,13 +1,12 @@
-import React, { useState, useRef } from 'react';
-import { FaSearch, FaCertificate, FaUser, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaDownload, FaPrint, FaUserShield } from 'react-icons/fa';
 import './CertificateVerification.css';
+import React, { useState } from 'react';
+import { FaSearch, FaCertificate, FaUser, FaCheckCircle, FaTimesCircle, FaDownload } from 'react-icons/fa';
 
 const CertificateVerification = () => {
   const [username, setUsername] = useState('');
   const [certificateNumber, setCertificateNumber] = useState('');
   const [verificationResult, setVerificationResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const certificateRef = useRef(null);
 
   const handleVerify = async (e) => {
     e.preventDefault();
@@ -22,45 +21,29 @@ const CertificateVerification = () => {
 
     try {
       const response = await fetch(
-        `https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}`,
-        {
-          headers: {
-            'Accept': 'application/json'
-          }
-        }
+        `https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}`
       );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Verification failed');
-      }
 
       const data = await response.json();
       
+      if (!response.ok) {
+        throw new Error(data.message || 'Verification failed');
+      }
+
       setVerificationResult({
         isValid: true,
-        holderName: data.certificate.holderName || username,
+        holderName: data.certificate.holderName,
         certificateNumber: data.certificate.certificateNumber,
-        courseName: data.certificate.courseName || "OSHEQ Training",
+        courseName: data.certificate.courseName,
         issueDate: data.certificate.date,
-        expiryDate: "12/12/2025",
-        pdfUrl: `https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}&download=true`,
-        qrCode: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
-          `Certificate Number: ${data.certificate.certificateNumber}\nUser: ${username}`
-        )}`,
-        user: {
-          name: username,
-          email: `${username.toLowerCase()}@example.com`,
-          joinDate: "01/01/2023"
-        }
+        pdfUrl: `https://osheq-api.vercel.app/api/certificates/generate?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}`
       });
 
     } catch (err) {
-      console.error('Verification error:', err);
       setVerificationResult({
         isValid: false,
         certificateNumber,
-        message: err.message
+        message: err.message || 'Failed to verify certificate'
       });
     } finally {
       setIsLoading(false);
@@ -78,175 +61,76 @@ const CertificateVerification = () => {
     document.body.removeChild(link);
   };
 
-  const handlePrint = () => {
-    if (!verificationResult?.pdfUrl) return;
-    
-    window.open(verificationResult.pdfUrl, '_blank');
-  };
-
   return (
     <div className="certificate-verification-container">
-      <div className="verification-hero">
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <FaUserShield className="hero-icon" />
-          <h1>Certificate Verification</h1>
-          <p>Verify training certificates with your credentials</p>
-        </div>
-      </div>
-
-      <div className="verification-body">
-        <div className="verification-card">
-          <div className="search-section">
-            <h2><FaSearch className="section-icon" /> Verify Certificate</h2>
-            <form onSubmit={handleVerify}>
-              <div className="input-group">
-                <label htmlFor="username">Your Username</label>
-                <div className="input-with-icon">
-                  <FaUser className="input-icon" />
-                  <input
-                    type="text"
-                    id="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Enter your username"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="input-group">
-                <label htmlFor="certificateNumber">Certificate Number</label>
-                <div className="input-with-icon">
-                  <FaCertificate className="input-icon" />
-                  <input
-                    type="text"
-                    id="certificateNumber"
-                    value={certificateNumber}
-                    onChange={(e) => setCertificateNumber(e.target.value)}
-                    placeholder="Enter certificate number (e.g. OSHEQ-12345)"
-                    required
-                  />
-                </div>
-              </div>
-
-              <button type="submit" disabled={isLoading} className="verify-btn">
-                {isLoading ? (
-                  <span className="loading-spinner"></span>
-                ) : (
-                  <>
-                    <FaSearch className="btn-icon" />
-                    Verify Certificate
-                  </>
-                )}
-              </button>
-            </form>
+      <div className="search-section">
+        <h2><FaSearch /> Verify Certificate</h2>
+        <form onSubmit={handleVerify}>
+          <div className="input-group">
+            <label htmlFor="username">Your Username</label>
+            <div className="input-with-icon">
+              <FaUser />
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your username"
+                required
+              />
+            </div>
           </div>
 
-          {verificationResult && (
-            <div className="result-section">
-              <div className="result-header">
-                {verificationResult.isValid ? (
-                  <>
-                    <FaCheckCircle className="status-icon valid" />
-                    <h3>Certificate Verified Successfully</h3>
-                  </>
-                ) : (
-                  <>
-                    <FaTimesCircle className="status-icon invalid" />
-                    <h3>Certificate Verification Failed</h3>
-                  </>
-                )}
-                <span className="verified-by">Verified by {username}</span>
+          <div className="input-group">
+            <label htmlFor="certificateNumber">Certificate Number</label>
+            <div className="input-with-icon">
+              <FaCertificate />
+              <input
+                type="text"
+                id="certificateNumber"
+                value={certificateNumber}
+                onChange={(e) => setCertificateNumber(e.target.value)}
+                placeholder="Enter certificate number"
+                required
+              />
+            </div>
+          </div>
+
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Verifying...' : 'Verify Certificate'}
+          </button>
+        </form>
+      </div>
+
+      {verificationResult && (
+        <div className="result-section">
+          {verificationResult.isValid ? (
+            <>
+              <div className="result-header valid">
+                <FaCheckCircle />
+                <h3>Certificate Verified Successfully</h3>
               </div>
-
-              {verificationResult.isValid ? (
-                <>
-                  <div className="certificate-display">
-                    <div className="certificate-image-container" ref={certificateRef}>
-                      <iframe 
-                        src={verificationResult.pdfUrl} 
-                        title="Certificate PDF"
-                        className="pdf-viewer"
-                      />
-                      <div className="certificate-overlay">
-                        <button className="action-btn" onClick={handleDownload}>
-                          <FaDownload /> Download
-                        </button>
-                        <button className="action-btn" onClick={handlePrint}>
-                          <FaPrint /> Print
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="certificate-details">
-                      <div className="detail-row">
-                        <FaUser className="detail-icon" />
-                        <div>
-                          <label>Certificate Holder</label>
-                          <p>{verificationResult.holderName}</p>
-                        </div>
-                      </div>
-
-                      <div className="detail-row">
-                        <FaCertificate className="detail-icon" />
-                        <div>
-                          <label>Certificate Number</label>
-                          <p>{verificationResult.certificateNumber}</p>
-                        </div>
-                      </div>
-
-                      <div className="detail-row">
-                        <FaCertificate className="detail-icon" />
-                        <div>
-                          <label>Course Name</label>
-                          <p>{verificationResult.courseName}</p>
-                        </div>
-                      </div>
-
-                      <div className="detail-row">
-                        <FaCalendarAlt className="detail-icon" />
-                        <div>
-                          <label>Issue Date</label>
-                          <p>{verificationResult.issueDate}</p>
-                        </div>
-                      </div>
-
-                      <div className="detail-row">
-                        <FaCalendarAlt className="detail-icon" />
-                        <div>
-                          <label>Expiry Date</label>
-                          <p>{verificationResult.expiryDate}</p>
-                        </div>
-                      </div>
-
-                      <div className="user-details">
-                        <h4>User Information</h4>
-                        <p>Name: {verificationResult.user.name}</p>
-                        <p>Email: {verificationResult.user.email}</p>
-                        <p>Member Since: {verificationResult.user.joinDate}</p>
-                      </div>
-
-                      <div className="qr-code">
-                        <img src={verificationResult.qrCode} alt="Verification QR Code" />
-                        <p>Scan to verify this certificate</p>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <div className="invalid-notice">
-                  <p>
-                    The certificate with number <strong>{verificationResult.certificateNumber}</strong> could not be verified.
-                    {verificationResult.message && <span> Reason: {verificationResult.message}</span>}
-                  </p>
-                  <p>Please check the details and try again, or contact our support team for assistance.</p>
-                </div>
-              )}
+              
+              <div className="certificate-details">
+                <p><strong>Holder:</strong> {verificationResult.holderName}</p>
+                <p><strong>Certificate Number:</strong> {verificationResult.certificateNumber}</p>
+                <p><strong>Course:</strong> {verificationResult.courseName}</p>
+                <p><strong>Issue Date:</strong> {verificationResult.issueDate}</p>
+                
+                <button onClick={handleDownload} className="download-btn">
+                  <FaDownload /> Download Certificate
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="result-header invalid">
+              <FaTimesCircle />
+              <h3>Verification Failed</h3>
+              <p>{verificationResult.message}</p>
             </div>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 };
