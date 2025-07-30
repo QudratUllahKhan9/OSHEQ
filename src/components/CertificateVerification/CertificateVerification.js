@@ -43,7 +43,7 @@ const CertificateVerification = () => {
         courseName: data.certificate.courseName || "OSHEQ Training",
         issueDate: data.certificate.date,
         expiryDate: "12/12/2025",
-        pdfUrl: `https://osheq-api.vercel.app/${data.certificate.pdfUrl}`,
+        pdfUrl: `https://osheq-api.vercel.app${data.certificate.pdfUrl}`,
         qrCode: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
           `Certificate Number: ${data.certificate.certificateNumber}\nUser: ${username}`
         )}`,
