@@ -257,7 +257,7 @@ const CertificateVerification = () => {
                         <FaCertificate className="detail-icon" />
                         <div>
                           <label>Course Name</label>
-                          
+                          <p>{verificationResult.courseName}</p>
                         </div>
                       </div>
 
