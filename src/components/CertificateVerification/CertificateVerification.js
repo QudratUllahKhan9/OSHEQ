@@ -36,7 +36,8 @@ const CertificateVerification = () => {
         certificateNumber: data.certificate.certificateNumber,
         courseName: data.certificate.courseName,
         issueDate: data.certificate.date,
-        pdfUrl: `https://osheq-api.vercel.app/api/certificates/generate?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}`
+        pdfUrl: `https://osheq-api.vercel.app/certificates/${data.certificate.certificateNumber}.pdf`,
+        pdfExists: data.certificate.pdfExists
       });
 
     } catch (err) {
@@ -111,15 +112,27 @@ const CertificateVerification = () => {
                 <h3>Certificate Verified Successfully</h3>
               </div>
               
-              <div className="certificate-details">
-                <p><strong>Holder:</strong> {verificationResult.holderName}</p>
-                <p><strong>Certificate Number:</strong> {verificationResult.certificateNumber}</p>
-                <p><strong>Course:</strong> {verificationResult.courseName}</p>
-                <p><strong>Issue Date:</strong> {verificationResult.issueDate}</p>
-                
-                <button onClick={handleDownload} className="download-btn">
-                  <FaDownload /> Download Certificate
-                </button>
+              <div className="certificate-display">
+                {verificationResult.pdfExists ? (
+                  <div className="pdf-viewer-container">
+                    <iframe 
+                      src={verificationResult.pdfUrl}
+                      title="Certificate PDF"
+                      className="pdf-viewer"
+                    />
+                    <button onClick={handleDownload} className="download-btn">
+                      <FaDownload /> Download PDF
+                    </button>
+                  </div>
+                ) : (
+                  <div className="certificate-details">
+                    <p>Certificate details are valid but PDF not found.</p>
+                    <p><strong>Holder:</strong> {verificationResult.holderName}</p>
+                    <p><strong>Certificate Number:</strong> {verificationResult.certificateNumber}</p>
+                    <p><strong>Course:</strong> {verificationResult.courseName}</p>
+                    <p><strong>Issue Date:</strong> {verificationResult.issueDate}</p>
+                  </div>
+                )}
               </div>
             </>
           ) : (
@@ -136,3 +149,5 @@ const CertificateVerification = () => {
 };
 
 export default CertificateVerification;
+      
+    
