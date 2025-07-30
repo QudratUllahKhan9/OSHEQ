@@ -1,7 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { FaSearch, FaCertificate, FaUser, FaCalendarAlt, FaCheckCircle, FaTimesCircle, FaDownload, FaPrint, FaUserShield } from 'react-icons/fa';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import './CertificateVerification.css';
 
 const CertificateVerification = () => {
@@ -24,13 +22,16 @@ const CertificateVerification = () => {
 
     try {
       const response = await fetch(
-        `https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}`
+        `https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}`,
+        {
+          headers: {
+            'Accept': 'application/json'
+          }
+        }
       );
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ 
-          message: 'Verification failed' 
-        }));
+        const errorData = await response.json();
         throw new Error(errorData.message || 'Verification failed');
       }
 
@@ -43,7 +44,7 @@ const CertificateVerification = () => {
         courseName: data.certificate.courseName || "OSHEQ Training",
         issueDate: data.certificate.date,
         expiryDate: "12/12/2025",
-        pdfUrl: `https://osheq-api.vercel.app${data.certificate.pdfUrl}`,
+        pdfUrl: `https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}&download=true`,
         qrCode: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
           `Certificate Number: ${data.certificate.certificateNumber}\nUser: ${username}`
         )}`,
@@ -67,66 +68,20 @@ const CertificateVerification = () => {
   };
 
   const handleDownload = () => {
-    if (verificationResult?.pdfUrl) {
-      // Direct download if PDF exists
-      const link = document.createElement('a');
-      link.href = verificationResult.pdfUrl;
-      link.download = `${verificationResult.certificateNumber}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      return;
-    }
-
-    // Fallback to generating PDF from HTML
-    if (!certificateRef.current) return;
-
-    html2canvas(certificateRef.current).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('landscape');
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${verificationResult.certificateNumber}.pdf`);
-    });
+    if (!verificationResult?.pdfUrl) return;
+    
+    const link = document.createElement('a');
+    link.href = verificationResult.pdfUrl;
+    link.download = `${verificationResult.certificateNumber}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handlePrint = () => {
-    if (verificationResult?.pdfUrl) {
-      window.open(verificationResult.pdfUrl, '_blank');
-      return;
-    }
-
-    if (!certificateRef.current) return;
-
-    html2canvas(certificateRef.current).then(canvas => {
-      const printWindow = window.open('', '_blank');
-      printWindow.document.write(`
-        <html>
-          <head>
-            <title>Print Certificate</title>
-            <style>
-              body { margin: 0; padding: 0; }
-              img { max-width: 100%; height: auto; }
-            </style>
-          </head>
-          <body>
-            <img src="${canvas.toDataURL('image/png')}" />
-            <script>
-              window.onload = function() {
-                setTimeout(function() {
-                  window.print();
-                  window.close();
-                }, 500);
-              }
-            </script>
-          </body>
-        </html>
-      `);
-      printWindow.document.close();
-    });
+    if (!verificationResult?.pdfUrl) return;
+    
+    window.open(verificationResult.pdfUrl, '_blank');
   };
 
   return (
@@ -209,23 +164,11 @@ const CertificateVerification = () => {
                 <>
                   <div className="certificate-display">
                     <div className="certificate-image-container" ref={certificateRef}>
-                      {verificationResult.pdfUrl ? (
-                        <iframe 
-                          src={verificationResult.pdfUrl} 
-                          title="Certificate PDF"
-                          className="pdf-viewer"
-                        />
-                      ) : (
-                        <div className="certificate-template">
-                          <h3>{verificationResult.courseName}</h3>
-                          <p>This certifies that</p>
-                          <h2>{verificationResult.holderName}</h2>
-                          <p>has successfully completed the training</p>
-                          <p>Certificate Number: {verificationResult.certificateNumber}</p>
-                          <p>Issued on: {verificationResult.issueDate}</p>
-                          <img src={verificationResult.qrCode} alt="QR Code" className="certificate-qr" />
-                        </div>
-                      )}
+                      <iframe 
+                        src={verificationResult.pdfUrl} 
+                        title="Certificate PDF"
+                        className="pdf-viewer"
+                      />
                       <div className="certificate-overlay">
                         <button className="action-btn" onClick={handleDownload}>
                           <FaDownload /> Download
