@@ -3,51 +3,128 @@ import './TopCourses.css';
 
 const courses = [
   {
-    title: "HAZWOPER",
+    title: "HAZWOPER 8-Hour Refresher",
     items: [
-      "8 Hours HAZWOPER Refresher Training",
-      "24 Hours HAZWOPER Refresher Training",
-      "40 Hours HAZWOPER Refresher Training"
-    ]
+      "Annual refresher training",
+      "Regulatory updates",
+      "Site safety review",
+      "PPE refresher"
+    ],
+    duration: "8 Hours",
+    level: "Annual Requirement",
+    icon: "🔄"
   },
   {
-    title: "HAZWOPER Site Safety",
-    items: ["On-site protocols", "PPE management", "Risk assessment"]
+    title: "HAZWOPER 24-Hour",
+    items: [
+      "Basic hazard recognition",
+      "Personal protective equipment",
+      "Decontamination procedures",
+      "Safety and health hazards"
+    ],
+    duration: "24 Hours",
+    level: "Basic Level",
+    icon: "⚠️"
+  },
+  {
+    title: "HAZWOPER 40-Hour",
+    items: [
+      "Comprehensive hazard training",
+      "Emergency response",
+      "Site control measures",
+      "Monitoring equipment"
+    ],
+    duration: "40 Hours",
+    level: "Professional",
+    icon: "🎓"
+  },
+  {
+    title: "HAZWOPER Supervisor",
+    items: [
+      "Incident command system",
+      "Team supervision",
+      "Compliance management",
+      "Site safety planning"
+    ],
+    duration: "16 Hours",
+    level: "Supervisory",
+    icon: "👨‍💼"
   },
   {
     title: "Emergency Response",
-    items: ["Spill response", "Evacuation drill", "Decontamination"]
+    items: [
+      "Spill response techniques",
+      "Decontamination setup",
+      "Emergency evacuation",
+      "First response protocols"
+    ],
+    duration: "12 Hours",
+    level: "Advanced",
+    icon: "🚨"
   },
   {
-    title: "Technician Level",
-    items: ["Advanced hazard handling", "Rescue ops", "Containment"]
-  },
-  {
-    title: "Supervisor Level",
-    items: ["Incident command", "Training compliance", "Site audit"]
-  },
-  {
-    title: "Medical Surveillance",
-    items: ["Health check", "Exposure tracking", "Recordkeeping"]
+    title: "Site Safety Technician",
+    items: [
+      "Air monitoring",
+      "Risk assessment",
+      "Safety documentation",
+      "Equipment calibration"
+    ],
+    duration: "20 Hours",
+    level: "Technical",
+    icon: "🔧"
   }
 ];
 
 export default function TopCourses() {
   return (
-    <div className="top-courses-section">
-      <h2 className="section-title-Top-Courses">Top Courses - HAZWOPER</h2>
+    <div className="top-courses-section" id="hazwoper-courses">
       <div className="top-courses-container">
-        {courses.map((course, index) => (
-          <div className="top-course-card animate-pop" key={index}>
-            <h3>{course.title}</h3>
-            <ul>
-              {course.items.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
-            <button className="view-btn">View All Program</button>
-          </div>
-        ))}
+        <div className="courses-header">
+          <h2 className="section-title-Top-Courses">HAZWOPER Training Programs</h2>
+          <p className="courses-subtitle">
+            Comprehensive Hazardous Waste Operations and Emergency Response training programs 
+            designed to meet OSHA 29 CFR 1910.120 requirements
+          </p>
+        </div>
+        
+        <div className="top-courses-grid">
+          {courses.map((course, index) => (
+            <div className="top-course-card animate-pop" key={index}>
+              <div className="course-icon">{course.icon}</div>
+              <div className="course-header">
+                <h3>{course.title}</h3>
+                <div className="course-meta">
+                  <span className="duration">{course.duration}</span>
+                  <span className="level">{course.level}</span>
+                </div>
+              </div>
+              
+              <ul className="course-features">
+                {course.items.map((item, idx) => (
+                  <li key={idx}>
+                    <span className="feature-check">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              
+              <div className="course-footer">
+                <button className="view-btn">
+                  View Program Details
+                  <svg className="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="courses-cta">
+          <p>Need custom HAZWOPER training for your organization?</p>
+          <button className="cta-btn">Get Custom Quote</button>
+        </div>
       </div>
     </div>
   );

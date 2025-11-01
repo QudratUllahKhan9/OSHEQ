@@ -15,7 +15,7 @@ const testimonials = [
   {
     name: 'Sana K., UAE',
     date: 'March 2022',
-    message: `"Without your free courses, I wouldn’t have been able to return to work so quickly. I appreciate the effort you put into making it accessible."`
+    message: `"Without your free courses, I wouldn't have been able to return to work so quickly. I appreciate the effort you put into making it accessible."`
   },
   {
     name: 'Carlos M., Mexico',
@@ -37,17 +37,32 @@ const testimonials = [
 const TestimonialsSection = () => {
   return (
     <section className="vertical-testimonial-section">
-      <h2 className="testimonial-heading">Testimonials</h2>
-      <div className="vertical-testimonials">
-        {testimonials.map((t, i) => (
-          <div className="testimonial-box" key={i}>
-            <p className="testimonial-text">{t.message}</p>
-            <div className="testimonial-footer">
-              <strong>{t.name}</strong>
-              <span>{t.date}</span>
+      <div className="testimonial-container">
+        <h2 className="testimonial-heading">What Our Students Say</h2>
+        <p className="testimonial-subtitle">Hear from safety professionals worldwide who transformed their careers with OSHEQ certifications</p>
+        
+        <div className="testimonials-grid">
+          {testimonials.map((t, i) => (
+            <div className="testimonial-card" key={i}>
+              <div className="quote-icon">"</div>
+              <p className="testimonial-text">{t.message}</p>
+              <div className="testimonial-footer">
+                <div className="testimonial-author">
+                  <strong>{t.name}</strong>
+                  <span>{t.date}</span>
+                </div>
+                <div className="country-flag">
+                  {t.name.split(', ')[1] === 'United States' && '🇺🇸'}
+                  {t.name.split(', ')[1] === 'Canada' && '🇨🇦'}
+                  {t.name.split(', ')[1] === 'UAE' && '🇦🇪'}
+                  {t.name.split(', ')[1] === 'Mexico' && '🇲🇽'}
+                  {t.name.split(', ')[1] === 'Saudi Arabia' && '🇸🇦'}
+                  {t.name.split(', ')[1] === 'Pakistan' && '🇵🇰'}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

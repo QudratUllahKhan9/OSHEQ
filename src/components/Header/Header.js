@@ -44,8 +44,8 @@ export default function Header() {
                   <span>ATP <FaChevronDown className={`chevron ${isAtpOpen ? 'open' : ''}`} /></span>
                   {isAtpOpen && (
                     <div className="dropdown-content">
-                      <Link to="/atp"><FaUserTie /> Login ATP</Link>
-                      <Link to="/register"><FaUserTie /> Become ATP</Link>
+                      <Link to="/atp"><FaUserTie />Details</Link>
+                    
                     </div>
                   )}
                 </li>

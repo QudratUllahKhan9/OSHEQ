@@ -24,7 +24,7 @@ const CertificateVerification = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/certificates/verify?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}`
+        `https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(username)}&certificateNumber=${encodeURIComponent(certificateNumber)}`
       );
 
       if (!response.ok) {
@@ -33,17 +33,19 @@ const CertificateVerification = () => {
         }));
         throw new Error(errorData.message || 'Verification failed');
       }
-
+ console.log(response,"KKKKKKKKKKK")
       const data = await response.json();
-      
+       console.log(data)
       setVerificationResult({
         isValid: true,
         holderName: data.certificate.holderName || username,
         certificateNumber: data.certificate.certificateNumber,
         courseName: data.certificate.courseName || "OSHEQ Training",
-        issueDate: data.certificate.date,
-        expiryDate: "12/12/2025",
-        pdfUrl: `http://localhost:5000${data.certificate.pdfUrl}`,
+        issueDate: data.certificate.dateOfIssue,
+        dateOfBirth: data.certificate.dateOfBirth,
+
+     
+        pdfUrl: `https://osheq-api.vercel.app/certificates/${data.certificate.certificateNumber}.pdf`,
         qrCode: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
           `Certificate Number: ${data.certificate.certificateNumber}\nUser: ${username}`
         )}`,
@@ -272,17 +274,17 @@ const CertificateVerification = () => {
                       <div className="detail-row">
                         <FaCalendarAlt className="detail-icon" />
                         <div>
-                          <label>Expiry Date</label>
-                          <p>{verificationResult.expiryDate}</p>
+                          <label>Date of birth</label>
+                          <p>{verificationResult.dateOfBirth}</p>
                         </div>
                       </div>
 
-                      <div className="user-details">
+                      {/* <div className="user-details">
                         <h4>User Information</h4>
                         <p>Name: {verificationResult.user.name}</p>
                         <p>Email: {verificationResult.user.email}</p>
                         <p>Member Since: {verificationResult.user.joinDate}</p>
-                      </div>
+                      </div> */}
 
                       <div className="qr-code">
                         <img src={verificationResult.qrCode} alt="Verification QR Code" />
