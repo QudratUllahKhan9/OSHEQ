@@ -6,6 +6,7 @@ import img3 from '../Home/assets/qualification_3.webp'
 import img4 from '../Home/assets/qualification_4.webp'
 import img5 from '../Home/assets/qualification5.webp'
 import img6 from '../Home/assets/qualification_6.webp'
+import { useNavigate } from "react-router-dom";
 
 // Data (Array) waisa hi hai jaisa pehle tha
 const qualifications = [
@@ -112,6 +113,12 @@ export default function QualificationsSection() {
     setSelectedCard(null);
   };
 
+  const navigate = useNavigate();
+  
+    const Qualifications = () => {
+      navigate('/qualifications'); // 👈 this route should match your QualificationsPage route
+    }
+
   return (
     <div className="qualifications-section" id="qualifications">
       <div className="qualifications-container">
@@ -141,7 +148,7 @@ export default function QualificationsSection() {
 
         <div className="qualifications-cta">
           <p>Ready to advance your safety career with OSHEQ certifications?</p>
-          <button className="cta-button">Explore All Qualifications</button>
+          <button className="cta-button" onClick={Qualifications}>Explore All Qualifications</button>
         </div>
       </div>
 
