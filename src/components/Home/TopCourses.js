@@ -1,5 +1,6 @@
 import React from 'react';
 import './TopCourses.css';
+import { useNavigate } from 'react-router-dom'
 
 const courses = [
   {
@@ -77,6 +78,11 @@ const courses = [
 ];
 
 export default function TopCourses() {
+  const navigate = useNavigate();
+    
+      const Qualifications = () => {
+        navigate('/qualifications'); // 👈 this route should match your QualificationsPage route
+      }
   return (
     <div className="top-courses-section" id="hazwoper-courses">
       <div className="top-courses-container">
@@ -103,14 +109,15 @@ export default function TopCourses() {
               <ul className="course-features">
                 {course.items.map((item, idx) => (
                   <li key={idx}>
-                    <span className="feature-check">✓</span>
+                    <span className="f
+                    eature-check">✓</span>
                     {item}
                   </li>
                 ))}
               </ul>
               
               <div className="course-footer">
-                <button className="view-btn">
+                <button className="view-btn" onClick={Qualifications}>
                   View Program Details
                   <svg className="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none">
                     <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -121,10 +128,7 @@ export default function TopCourses() {
           ))}
         </div>
 
-        <div className="courses-cta">
-          <p>Need custom HAZWOPER training for your organization?</p>
-          <button className="cta-btn">Get Custom Quote</button>
-        </div>
+    
       </div>
     </div>
   );

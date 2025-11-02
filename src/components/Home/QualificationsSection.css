@@ -1,3 +1,4 @@
+/* --- Original CSS (Pehle jaisa) --- */
 .qualifications-section {
   padding: 80px 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -63,6 +64,7 @@
   height: 280px;
   animation: zoomIn 0.6s ease forwards;
   opacity: 0;
+  cursor: pointer; /* Clickable banaya */
 }
 
 .qualification-card::before {
@@ -168,7 +170,7 @@
   box-shadow: 0 10px 30px rgba(255, 215, 0, 0.6);
 }
 
-/* Animation */
+/* --- Animation (Original) --- */
 @keyframes zoomIn {
   from {
     transform: scale(0.9);
@@ -187,38 +189,31 @@
 .qualification-card:nth-child(5) { animation-delay: 0.5s; }
 .qualification-card:nth-child(6) { animation-delay: 0.6s; }
 
-/* Responsive Design */
+/* --- Responsive (Original) --- */
 @media (max-width: 768px) {
   .qualifications-section {
     padding: 60px 0;
   }
-
   .section-title h2 {
     font-size: 2.5rem;
   }
-
   .section-subtitle {
     font-size: 1.1rem;
   }
-
   .cards-wrapper {
     grid-template-columns: 1fr;
     gap: 25px;
   }
-
   .qualifications-container {
     max-width: 95%;
     padding: 0 15px;
   }
-
   .qualification-card {
     height: 250px;
   }
-
   .card-content {
     padding: 25px;
   }
-
   .card-content h3 {
     font-size: 1.6rem;
   }
@@ -228,59 +223,219 @@
   .qualifications-section {
     padding: 40px 0;
   }
-
   .section-title h2 {
     font-size: 2rem;
   }
-
   .section-subtitle {
     font-size: 1rem;
   }
-
   .qualification-card {
     height: 220px;
   }
-
   .card-content {
     padding: 20px;
   }
-
   .card-content h3 {
     font-size: 1.4rem;
   }
-
   .card-content p {
     font-size: 1rem;
   }
-
   .qualifications-cta {
     padding: 30px 20px;
   }
-
   .qualifications-cta p {
     font-size: 1.1rem;
   }
 }
 
-/* Print Styles */
+/* --- Print Styles (Original) --- */
 @media print {
   .qualifications-section {
     background: white !important;
     padding: 40px 0 !important;
   }
-
   .section-title h2 {
     color: #2c3e50 !important;
     text-shadow: none !important;
   }
-
   .qualification-card {
     break-inside: avoid;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
     margin-bottom: 20px;
   }
-
   .cta-button {
     display: none;
+  }
+}
+
+
+/* ===============================================
+--- MODAL STYLES (YAHAN TABDEELI KI GAI HAI) ---
+===============================================
+*/
+
+.modal-overlay {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8); 
+  backdrop-filter: blur(5px);
+  z-index: 1000; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease; 
+}
+
+.modal-content {
+  background: white;
+  color: #333;
+  padding: 30px 35px;
+  border-radius: 15px;
+  max-width: 800px; /* Width barha di hai take side-by-side fit ho */
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  position: relative;
+  max-height: 90vh; 
+  overflow-y: auto; 
+  animation: slideUp 0.4s ease-out; 
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* Ensure button is on top */
+}
+
+.modal-close-btn:hover {
+  background: #e0e0e0;
+  transform: scale(1.1);
+}
+
+/* --- NAYA CSS LAYOUT KE LIYE --- */
+.modal-body {
+  display: flex;
+  gap: 30px; /* Dono columns ke darmiyan faasla */
+}
+
+.modal-image-col {
+  flex: 0 0 250px; /* Image column ki width fix ki hai */
+  width: 250px;
+}
+
+.modal-text-col {
+  flex: 1; /* Text column baqi jagah le lega */
+  min-width: 0; /* Flexbox bug fix */
+}
+/* --- NAYA CSS KHATAM --- */
+
+
+.modal-img {
+  width: 100%;
+  height: auto; /* Height auto taake aspect ratio kharab na ho */
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 0; /* Pehle margin-bottom tha, ab nahi chahiye */
+}
+
+.modal-content h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin: 0 0 15px 0;
+  line-height: 1.2;
+}
+
+.modal-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.modal-content h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #667eea;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 5px;
+}
+
+.modal-details-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.modal-details-list li {
+  font-size: 1.05rem;
+  margin-bottom: 10px;
+  color: #444;
+  position: relative;
+  padding-left: 25px;
+}
+
+.modal-details-list li::before {
+  content: '✔'; /* Checkmark icon */
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #764ba2;
+  font-weight: bold;
+}
+
+/* Modal Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- NAYA RESPONSIVE STYLE --- */
+/* Choti screens par wapis 'upar neeche' layout */
+@media (max-width: 650px) {
+  .modal-body {
+    flex-direction: column; /* Side-by-side se Upar-neeche */
+    gap: 20px;
+  }
+  
+  .modal-image-col {
+    width: 100%; /* Image poori width le le */
+    flex-basis: auto;
+  }
+
+  .modal-img {
+    height: 200px; /* Height fix kar di mobile pe */
+  }
+
+  .modal-content {
+    padding: 25px 20px;
+    max-width: 400px;
+  }
+
+  .modal-content h2 {
+    font-size: 1.8rem;
   }
 }

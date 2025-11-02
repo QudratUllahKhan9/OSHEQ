@@ -18,45 +18,44 @@ const AboutSection = () => {
   return (
     <div className="about-container">
       {/* Hero Section - Full Screen */}
-  
-{/* Hero Section - Full Screen */}
-<section className="fullscreen-section hero-section">
-  <div className="section-content">
-    <div className="hero-text-container">
-      <h1 data-aos="fade-up">
-        <span className="hero-highlight">Redefining</span> Workplace Safety & Sustainability
-      </h1>
-      <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
-        Where <span className="accent-text">safety protocols</span> meet <span className="accent-text">environmental stewardship</span> 
-        to create workplaces that thrive today and endure tomorrow.
-      </p>
-      
-      <div className="hero-features" data-aos="fade-up" data-aos-delay="400">
-        <div className="feature-item">
-          <FaShieldAlt className="feature-icon" />
-          <span>Certified Safety Experts</span>
+      <section className="fullscreen-section hero-section">
+        <div className="section-content">
+          <div className="hero-text-container">
+            <h1 data-aos="fade-up">
+              <span className="hero-highlight">Redefining</span> Workplace Safety & Sustainability
+            </h1>
+            <p className="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+              Where <span className="accent-text">safety protocols</span> meet <span className="accent-text">environmental stewardship</span> 
+              to create workplaces that thrive today and endure tomorrow.
+            </p>
+            
+            <div className="hero-features" data-aos="fade-up" data-aos-delay="400">
+              <div className="feature-item">
+                <FaShieldAlt className="feature-icon" />
+                <span>Certified Safety Experts</span>
+              </div>
+              <div className="feature-item">
+                <FaLeaf className="feature-icon" />
+                <span>Sustainable Solutions</span>
+              </div>
+              <div className="feature-item">
+                <FaChartLine className="feature-icon" />
+                <span>Proven Results</span>
+              </div>
+            </div>
+            
+            <div className="hero-cta" data-aos="fade-up" data-aos-delay="600">
+              <button className="cta-primary">
+                Get Your Free Consultation
+              </button>
+              <button className="cta-secondary">
+                Learn About Our Approach <FaChevronDown />
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="feature-item">
-          <FaLeaf className="feature-icon" />
-          <span>Sustainable Solutions</span>
-        </div>
-        <div className="feature-item">
-          <FaChartLine className="feature-icon" />
-          <span>Proven Results</span>
-        </div>
-      </div>
-      
-      <div className="hero-cta" data-aos="fade-up" data-aos-delay="600">
-        <button className="cta-primary">
-          Get Your Free Consultation
-        </button>
-        <button className="cta-secondary">
-          Learn About Our Approach <FaChevronDown />
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
+
       {/* Mission Section - Full Screen */}
       <section className="fullscreen-section mission-section" id="mission">
         <div className="section-content">
@@ -148,19 +147,22 @@ const AboutSection = () => {
             <div className="team-member">
               <div className="member-photo" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80')" }}></div>
               <h3>Sarah Johnson</h3>
-              <p className="position">CEO & Chief Safety Officer</p>
+              <p className="position">CEO & Founder</p>
+              <p className="member-bio">20+ years in occupational safety and health management</p>
             </div>
             
             <div className="team-member">
               <div className="member-photo" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80')" }}></div>
               <h3>Michael Chen</h3>
-              <p className="position">Director of Environmental Compliance</p>
+              <p className="position">Chief Operations Officer</p>
+              <p className="member-bio">Expert in environmental management and sustainability</p>
             </div>
             
             <div className="team-member">
               <div className="member-photo" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80')" }}></div>
               <h3>David Rodriguez</h3>
-              <p className="position">Quality Assurance Manager</p>
+              <p className="position">Quality Assurance Director</p>
+              <p className="member-bio">Specialized in quality systems and process improvement</p>
             </div>
           </div>
         </div>

@@ -33,21 +33,34 @@ const CertificateVerification = () => {
         }));
         throw new Error(errorData.message || 'Verification failed');
       }
- console.log(response,"KKKKKKKKKKK")
+      console.log(response,"KKKKKKKKKKK")
       const data = await response.json();
-       console.log(data)
+      console.log(data)
+
+      // --- START: This is the logic you wanted ---
+      
+      // 1. Get the certificate number and PDF URL
+      const certNumber = data.certificate.certificateNumber;
+      const certificatePdfUrl = `https://osheq-api.vercel.app/certificates/${certNumber}.pdf`;
+
+      // 2. Create the NEW public URL for the QR Code
+      //    (This is the page you must build on osheq.us)
+      const publicVerificationUrl = `https://www.osheq.us/certificate-lookup?cert=${encodeURIComponent(certNumber)}`;
+
       setVerificationResult({
         isValid: true,
         holderName: data.certificate.holderName || username,
-        certificateNumber: data.certificate.certificateNumber,
+        certificateNumber: certNumber,
         courseName: data.certificate.courseName || "OSHEQ Training",
         issueDate: data.certificate.dateOfIssue,
         dateOfBirth: data.certificate.dateOfBirth,
 
-     
-        pdfUrl: `https://osheq-api.vercel.app/certificates/${data.certificate.certificateNumber}.pdf`,
+        // 3. pdfUrl is for the iframe viewer on this page
+        pdfUrl: certificatePdfUrl, 
+
+        // 4. qrCode now links to your public page, NOT the PDF
         qrCode: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(
-          `Certificate Number: ${data.certificate.certificateNumber}\nUser: ${username}`
+          publicVerificationUrl
         )}`,
         user: {
           name: username,
@@ -55,6 +68,7 @@ const CertificateVerification = () => {
           joinDate: "01/01/2023"
         }
       });
+      // --- END: Logic Change ---
 
     } catch (err) {
       console.error('Verification error:', err);
@@ -70,7 +84,6 @@ const CertificateVerification = () => {
 
   const handleDownload = () => {
     if (verificationResult?.pdfUrl) {
-      // Direct download if PDF exists
       const link = document.createElement('a');
       link.href = verificationResult.pdfUrl;
       link.download = `${verificationResult.certificateNumber}.pdf`;
@@ -80,16 +93,13 @@ const CertificateVerification = () => {
       return;
     }
 
-    // Fallback to generating PDF from HTML
     if (!certificateRef.current) return;
-
     html2canvas(certificateRef.current).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('landscape');
       const imgProps = pdf.getImageProperties(imgData);
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save(`${verificationResult.certificateNumber}.pdf`);
     });
@@ -102,30 +112,22 @@ const CertificateVerification = () => {
     }
 
     if (!certificateRef.current) return;
-
     html2canvas(certificateRef.current).then(canvas => {
       const printWindow = window.open('', '_blank');
       printWindow.document.write(`
-        <html>
-          <head>
-            <title>Print Certificate</title>
-            <style>
-              body { margin: 0; padding: 0; }
-              img { max-width: 100%; height: auto; }
-            </style>
-          </head>
-          <body>
-            <img src="${canvas.toDataURL('image/png')}" />
-            <script>
-              window.onload = function() {
-                setTimeout(function() {
-                  window.print();
-                  window.close();
-                }, 500);
-              }
-            </script>
-          </body>
-        </html>
+        <html><head><title>Print Certificate</title>
+        <style>body { margin: 0; padding: 0; } img { max-width: 100%; height: auto; }</style>
+        </head><body>
+        <img src="${canvas.toDataURL('image/png')}" />
+        <script>
+          window.onload = function() {
+            setTimeout(function() {
+              window.print();
+              window.close();
+            }, 500);
+          }
+        </script>
+        </body></html>
       `);
       printWindow.document.close();
     });
@@ -175,6 +177,15 @@ const CertificateVerification = () => {
                     required
                   />
                 </div>
+              </div>
+
+              {/* This is the OSHEQ.us link */}
+              <div className="main-site-link">
+                <p>
+                  Part of the <a href="https://www.osheq.us" target="_blank" rel="noopener noreferrer">
+                    OSHEQ.us
+                  </a> official network.
+                </p>
               </div>
 
               <button type="submit" disabled={isLoading} className="verify-btn">
@@ -278,13 +289,6 @@ const CertificateVerification = () => {
                           <p>{verificationResult.dateOfBirth}</p>
                         </div>
                       </div>
-
-                      {/* <div className="user-details">
-                        <h4>User Information</h4>
-                        <p>Name: {verificationResult.user.name}</p>
-                        <p>Email: {verificationResult.user.email}</p>
-                        <p>Member Since: {verificationResult.user.joinDate}</p>
-                      </div> */}
 
                       <div className="qr-code">
                         <img src={verificationResult.qrCode} alt="Verification QR Code" />

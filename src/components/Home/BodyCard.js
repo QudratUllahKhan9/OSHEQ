@@ -1,8 +1,22 @@
 import React from 'react';
 import './BodyCard.css';
 import { FaGraduationCap, FaCheckCircle, FaHandshake, FaArrowRight } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom'
 
 export default function BodyCard() {
+  const navigate = useNavigate();
+  
+    const Qualifications = () => {
+      navigate('/qualifications'); // 👈 this route should match your QualificationsPage route
+    }
+
+      const Verification = () => {
+      navigate('/verify'); // 👈 this route should match your QualificationsPage route
+    } 
+    
+    const Authorized  = () => {
+      navigate('/Register'); // 👈 this route should match your QualificationsPage route
+    }
   return (
     <div className='body-card-container'>
       {/* Qualifications Card */}
@@ -17,7 +31,7 @@ export default function BodyCard() {
           Our programs aim to significantly reduce incident rates and enhance 
           safety culture across industries worldwide.
         </p>
-        <button className="card-button">
+        <button className="card-button" onClick={Qualifications}>
           Explore Qualifications
           <FaArrowRight style={{ marginLeft: '8px' }} />
         </button>
@@ -35,7 +49,7 @@ export default function BodyCard() {
           validate certifications to ensure authenticity and compliance with 
           industry standards.
         </p>
-        <button className="card-button">
+        <button className="card-button" onClick={Verification}>
           Verify Credentials
           <FaArrowRight style={{ marginLeft: '8px' }} />
         </button>
@@ -53,7 +67,7 @@ export default function BodyCard() {
           from our globally recognized curriculum, marketing support, and quality 
           assurance programs.
         </p>
-        <button className="card-button">
+        <button className="card-button" onClick={Authorized}>
           Partner With Us
           <FaArrowRight style={{ marginLeft: '8px' }} />
         </button>

@@ -393,6 +393,29 @@
   font-size: 0.95rem;
 }
 
+/* This is the OSHEQ.us link style */
+.main-site-link {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.main-site-link p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.main-site-link a {
+  color: #003366;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.main-site-link a:hover {
+  text-decoration: underline;
+}
+
+
 /* Responsive Design */
 @media (max-width: 992px) {
   .certificate-display {
