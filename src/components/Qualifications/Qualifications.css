@@ -1,355 +1,90 @@
-/* Qualifications.css */
-.qualifications-container-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
+/* ============================================== */
+/* --- Global Styles --- */
+/* ============================================== */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Hero Section */
-.qualifications-hero {
-  position: relative;
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-  color: white;
-  padding: 100px 0;
-  text-align: center;
-  overflow: hidden;
+/* ============================================== */
+/* --- Simple List Page Styles (Aapke code se) --- */
+/* ============================================== */
+.simple-qualifications-page {
+  max-width: '100%'; /* '100%' ghalat tha, maine 900px kar diya */
+  margin: 40px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff; /* Saada white background */
 }
 
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
+/* Screenshot jaisa BADA PEELA TITLE */
+.simple-qualifications-page h1 {
+  color: #f0c000; /* Screenshot wala Peela/Gold rang */
+  font-size: 2.5rem; /* 40px */
+  font-weight: 800;
+  margin-bottom: 40px;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
+/* Category ka section (halka grey background) */
+.category-section {
+  margin-bottom: 30px;
+  background-color: #f8f9fa; /* Screenshot jaisa halka grey background */
+  padding: 25px 30px;
+  border-radius: 8px;
 }
 
-.hero-icon {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  color: #f39c12;
-}
-
-.hero-content h1 {
-  font-size: 3.5rem;
-  margin-bottom: 1rem;
+/* Category ka Title (Blue rang) */
+.category-section h2 {
+  color: #0056b3; /* Screenshot jaisa dark blue */
+  font-size: 1.75rem; /* 28px */
   font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
-.hero-content p {
-  font-size: 1.3rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  margin-top: 3rem;
-}
-
-.stat {
-  text-align: center;
-}
-
-.stat strong {
-  display: block;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #f39c12;
-}
-
-.stat span {
-  font-size: 1rem;
-  opacity: 0.9;
-}
-
-/* Main Content */
-.qualifications-content {
-  background: #f8f9fa;
-  padding: 80px 0;
-}
-
-.intro-section {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.intro-section h2 {
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-}
-
-.intro-section p {
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-/* Training Categories */
-.training-categories h3 {
-  font-size: 2rem;
-  color: #2c3e50;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.categories-grid {
-  display: grid;
-  gap: 1.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.category-card {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.category-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.category-header {
-  padding: 1.5rem;
-  background: linear-gradient(135deg, #3498db, #2980b9);
-  color: white;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background 0.3s ease;
-}
-
-.category-header:hover {
-  background: linear-gradient(135deg, #2980b9, #3498db);
-}
-
-.category-title {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.category-icon {
-  font-size: 1.5rem;
-}
-
-.category-header h4 {
+/* Courses ki list */
+.course-list {
+  list-style: disc; /* Simple bullet points */
+  padding-left: 30px;
   margin: 0;
-  font-size: 1.3rem;
-  font-weight: 600;
 }
 
-/* Courses List */
-.courses-list {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
+.course-list li {
+  margin-bottom: 12px;
+  font-size: 1rem; /* 16px */
 }
 
-.courses-list.active {
-  max-height: 2000px;
+/* Course ke links (Blue rang) */
+.course-list li a {
+  color: #007bff; /* Standard link blue */
+  text-decoration: none;
+  font-weight: 400;
 }
 
-.course-card {
-  display: flex;
-  padding: 1.5rem;
-  border-bottom: 1px solid #ecf0f1;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  gap: 1.5rem;
+.course-list li a:hover {
+  text-decoration: underline;
+  color: #0056b3;
 }
 
-.course-card:hover {
-  background: #f8f9fa;
-}
 
-.course-card:last-child {
-  border-bottom: none;
-}
+/* ============================================== */
+/* --- NAYA Detail Page Styles (Image ke mutabiq) --- */
+/* ============================================== */
 
-.course-image {
-  position: relative;
-  flex-shrink: 0;
-  width: 150px;
-  height: 100px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.course-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.course-level {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #e74c3c;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: 600;
-}
-
-.course-content {
-  flex: 1;
-}
-
-.course-content h5 {
-  font-size: 1.1rem;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-.course-content p {
-  color: #7f8c8d;
-  margin-bottom: 1rem;
-  line-height: 1.5;
-  font-size: 0.9rem;
-}
-
-.course-meta {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  font-size: 0.85rem;
-  color: #95a5a6;
-}
-
-.course-meta span {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-
-.course-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.certification-badge {
-  background: #27ae60;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.view-details-btn {
-  background: #3498db;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: background 0.3s ease;
-}
-
-.view-details-btn:hover {
-  background: #2980b9;
-}
-
-/* Benefits Section */
-.benefits-section {
-  margin-top: 6rem;
-  text-align: center;
-}
-
-.benefits-section h2 {
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin-bottom: 3rem;
-}
-
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.benefit-card {
-  background: white;
-  padding: 2.5rem 2rem;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.benefit-card:hover {
-  transform: translateY(-10px);
-}
-
-.benefit-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #3498db, #2980b9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  font-size: 2rem;
-  color: white;
-}
-
-.benefit-card h3 {
-  font-size: 1.5rem;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-}
-
-.benefit-card p {
-  color: #7f8c8d;
-  line-height: 1.6;
-}
-
-/* Course Detail View */
-.course-detail-container {
+.course-detail-page {
+  background-color: #ffffff;
   min-height: 100vh;
-  background: #f8f9fa;
-}
-
-.course-detail-header {
-  background: white;
-  padding: 1rem 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  max-width: 900px; /* List page jaisa width */
+  margin: 40px auto; /* Dono pages ko center mein rakhega */
 }
 
 .back-button {
-  background: #3498db;
-  color: white;
-  border: none;
+  background: #f0f2f5;
+  color: #333;
+  border: 1px solid #ddd;
   padding: 10px 20px;
   border-radius: 25px;
   cursor: pointer;
@@ -358,295 +93,70 @@
   gap: 0.5rem;
   font-weight: 600;
   transition: background 0.3s ease;
+  margin-bottom: 30px;
 }
 
 .back-button:hover {
-  background: #2980b9;
+  background: #e4e6e9;
 }
 
-.course-detail-hero {
-  position: relative;
-  height: 400px;
-  overflow: hidden;
+.course-title {
+  color: #f0c000; /* Screenshot wala Peela/Gold rang */
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
-.course-detail-hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.course-hero-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 3rem 0;
-  color: white;
-  z-index: 2;
-}
-
-.course-badge {
-  display: inline-block;
-  background: #e74c3c;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.course-hero-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.course-hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  opacity: 0.9;
-  max-width: 600px;
-}
-
-.course-hero-meta {
-  display: flex;
-  gap: 2rem;
-  font-size: 1rem;
-}
-
-.course-hero-meta span {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 0.9;
-}
-
-.course-detail-content {
-  padding: 4rem 0;
-}
-
-.course-layout {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 3rem;
-}
-
-.course-section {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
-}
-
-.course-section h2 {
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-}
-
-.topics-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.topic-card {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 10px;
-  text-align: center;
-  border-left: 4px solid #3498db;
-}
-
-.topic-number {
-  background: #3498db;
-  color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-  font-weight: 600;
-}
-
-.features-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-}
-
-.feature-icon {
-  background: #27ae60;
-  color: white;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-}
-
-/* Sidebar */
-.course-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.enrollment-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.price-section h3 {
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
-
-.price-section p {
-  color: #7f8c8d;
-  margin-bottom: 1.5rem;
-}
-
-.info-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.info-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.8rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  font-size: 0.9rem;
-}
-
-.enroll-button {
-  width: 100%;
-  background: #27ae60;
-  color: white;
-  border: none;
-  padding: 15px;
-  border-radius: 10px;
+.course-description {
   font-size: 1.1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-bottom: 1rem;
+  color: #333;
+  line-height: 1.7;
+  margin-bottom: 40px;
 }
 
-.enroll-button:hover {
-  background: #219a52;
-}
-
-.guarantee-badge {
-  color: #27ae60;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.benefits-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.benefits-card h4 {
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  font-size: 1.3rem;
-}
-
-.benefits-list {
+/* --- Tabs Styling --- */
+.course-tabs-nav {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 30px;
+  flex-wrap: wrap; /* Mobile ke liye */
 }
 
-.benefit-item {
-  padding: 1rem;
-  background: #f8f9fa;
+.course-tabs-nav button {
+  background: none;
+  border: none;
+  padding: 15px 20px;
+  font-size: 1rem; /* Thora chota kiya */
+  font-weight: 600;
+  color: #777;
+  cursor: pointer;
+  position: relative;
+  bottom: -2px; /* Border ke upar overlap ke liye */
+  border-bottom: 3px solid transparent;
+  text-align: left;
+}
+
+.course-tabs-nav button.active {
+  color: #0056b3; /* Active tab ka rang */
+  border-bottom-color: #0056b3;
+}
+
+.course-tabs-content {
+  background-color: #f8f9fa; /* Screenshot jaisa halka grey background */
+  padding: 30px;
   border-radius: 8px;
-  border-left: 4px solid #f39c12;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .hero-stats {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .hero-content h1 {
-    font-size: 2.5rem;
-  }
-  
-  .course-card {
-    flex-direction: column;
-  }
-  
-  .course-image {
-    width: 100%;
-    height: 200px;
-  }
-  
-  .course-layout {
-    grid-template-columns: 1fr;
-  }
-  
-  .benefits-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .course-hero-meta {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .topics-grid {
-    grid-template-columns: 1fr;
-  }
+.course-tabs-content ul {
+  list-style: disc;
+  padding-left: 25px;
+  margin: 0;
 }
 
-@media (max-width: 480px) {
-  .container {
-    padding: 0 15px;
-  }
-  
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-  
-  .intro-section h2 {
-    font-size: 2rem;
-  }
-  
-  .benefits-section h2 {
-    font-size: 2rem;
-  }
+.course-tabs-content li {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.8;
+  margin-bottom: 12px;
 }
