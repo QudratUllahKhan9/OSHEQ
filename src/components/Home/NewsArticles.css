@@ -1,7 +1,11 @@
+/* =========================================
+   1. MAIN SECTION & CONTAINER
+   ========================================= */
 .news-section {
   padding: 80px 0;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   position: relative;
+  overflow: hidden; /* Background overflow rokne ke liye */
 }
 
 .news-container {
@@ -34,6 +38,9 @@
   line-height: 1.6;
 }
 
+/* =========================================
+   2. GRID & CARD DESIGN
+   ========================================= */
 .news-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -50,6 +57,9 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  /* Animation */
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
 }
 
 .news-card:hover {
@@ -57,6 +67,17 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
+/* Card Animation Delays */
+.news-card:nth-child(1) { animation-delay: 0.1s; }
+.news-card:nth-child(2) { animation-delay: 0.2s; }
+.news-card:nth-child(3) { animation-delay: 0.3s; }
+.news-card:nth-child(4) { animation-delay: 0.4s; }
+.news-card:nth-child(5) { animation-delay: 0.5s; }
+.news-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* =========================================
+   3. CARD IMAGES & CONTENT
+   ========================================= */
 .news-image-container {
   position: relative;
   height: 220px;
@@ -95,6 +116,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  z-index: 2;
 }
 
 .news-content {
@@ -147,6 +169,9 @@
   overflow: hidden;
 }
 
+/* =========================================
+   4. BUTTONS
+   ========================================= */
 .news-footer {
   margin-top: auto;
 }
@@ -179,62 +204,154 @@
   transform: translateX(3px);
 }
 
-.news-cta {
-  text-align: center;
+/* =========================================
+   5. MODAL (POPUP) STYLES
+   ========================================= */
+.news-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85); /* Dark background */
+  backdrop-filter: blur(8px); /* Blur effect */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.news-modal-content {
   background: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  margin-top: 30px;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-height: 90vh; /* Screen height ka 90% */
+  overflow-y: auto; /* Scrollable */
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.news-cta p {
-  font-size: 1.1rem;
-  color: #2c3e50;
-  margin-bottom: 20px;
-}
-
-.subscribe-btn {
-  background: linear-gradient(135deg, #4caf50, #45a049);
-  color: white;
+.news-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 255, 255, 0.9);
   border: none;
-  padding: 14px 28px;
-  border-radius: 8px;
-  font-weight: 600;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  color: #333;
 }
 
-.subscribe-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+.news-modal-close:hover {
+  background: white;
+  transform: scale(1.1);
+  color: #ff4757;
 }
 
-/* Animation for cards */
+.news-modal-header {
+  position: relative;
+  height: 350px; /* Badi image */
+  width: 100%;
+}
+
+.news-modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-modal-badges {
+  position: absolute;
+  bottom: 20px;
+  left: 25px;
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+/* Modal ke andar category ka style thoda alag ho sakta hai agar chahein */
+.news-modal-badges .news-category {
+  position: static; /* Absolute hataya taake flex kaam kare */
+}
+
+.news-modal-badges .news-read-time {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.news-modal-body {
+  padding: 40px;
+}
+
+.news-modal-body .news-date {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.news-modal-body h2 {
+  font-size: 2.4rem;
+  color: #2c3e50;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+}
+
+.news-divider {
+  height: 4px;
+  width: 60px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 2px;
+  margin-bottom: 30px;
+}
+
+.news-full-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a5568;
+  white-space: pre-line; /* Paragraph breaks ke liye zaroori */
+}
+
+/* =========================================
+   6. ANIMATIONS
+   ========================================= */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.news-card {
-  animation: fadeInUp 0.6s ease forwards;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.news-card:nth-child(1) { animation-delay: 0.1s; }
-.news-card:nth-child(2) { animation-delay: 0.2s; }
-.news-card:nth-child(3) { animation-delay: 0.3s; }
-.news-card:nth-child(4) { animation-delay: 0.4s; }
-.news-card:nth-child(5) { animation-delay: 0.5s; }
-.news-card:nth-child(6) { animation-delay: 0.6s; }
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
 
-/* Responsive Design */
+/* =========================================
+   7. RESPONSIVE DESIGN
+   ========================================= */
+
+/* Tablet & Mobile */
 @media (max-width: 768px) {
   .news-section {
     padding: 60px 0;
@@ -242,10 +359,6 @@
 
   .news-title {
     font-size: 2.2rem;
-  }
-
-  .news-subtitle {
-    font-size: 1.1rem;
   }
 
   .news-grid {
@@ -258,40 +371,42 @@
     padding: 0 15px;
   }
 
-  .news-content {
-    padding: 20px;
+  /* Modal Responsive */
+  .news-modal-header {
+    height: 200px;
   }
 
-  .news-image-container {
-    height: 200px;
+  .news-modal-body {
+    padding: 25px;
+  }
+
+  .news-modal-body h2 {
+    font-size: 1.6rem;
+  }
+
+  .news-full-text {
+    font-size: 1rem;
   }
 }
 
+/* Small Mobile */
 @media (max-width: 480px) {
-  .news-section {
-    padding: 40px 0;
-  }
-
   .news-title {
     font-size: 1.8rem;
-  }
-
-  .news-subtitle {
-    font-size: 1rem;
   }
 
   .news-grid {
     grid-template-columns: 1fr;
   }
 
-  .news-cta {
-    padding: 30px 20px;
-  }
-
   .news-meta {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+  
+  .news-modal-content {
+    border-radius: 15px;
   }
 }
 
@@ -301,14 +416,12 @@
     background: white !important;
     padding: 40px 0 !important;
   }
-
   .news-card {
     break-inside: avoid;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-    margin-bottom: 20px;
+    box-shadow: none !important;
+    border: 1px solid #ddd;
   }
-
-  .read-btn, .subscribe-btn {
-    display: none;
+  .read-btn, .news-modal-overlay {
+    display: none; /* Print mein button aur modal na aaye */
   }
 }

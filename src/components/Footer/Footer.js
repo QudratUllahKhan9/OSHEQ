@@ -2,6 +2,7 @@ import React from "react";
 import "./Footer.css";
 import footerLogo from "../Home/assets/img1.png"; // Replace with your logo path
 import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -18,14 +19,15 @@ export default function Footer() {
         <div className="footer-columns">
           <div className="footer-column">
             <h4>Company Info</h4>
-            <ul>
-              <li>About Us</li>
-              <li>Contact Us</li>
-              <li>Become A Partner</li>
-              <li>Courses</li>
-              <li>Verification</li>
-              <li>Blog</li>
-            </ul>
+          <ul>
+  <li><Link to="/about">About Us</Link></li>
+  <li><Link to="/contact">Contact Us</Link></li>
+  {/* <li><Link to="/partner">Become A Partner</Link></li> */}
+  <li><Link to="/qualifications">Courses</Link></li>
+  <li><Link to="/verify">Verification</Link></li>
+  {/* <li><Link to="/blog">Blog</Link></li> */}
+</ul>
+
           </div>
 
           <div className="footer-column">
