@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutUs.css';
-import aboutImg from './assets/person.webp'; // Your image path
+import aboutImg from './assets/person1.png'; // Your image path
 import { useNavigate } from 'react-router-dom'
 export default function AboutUs() {
     const navigate = useNavigate();

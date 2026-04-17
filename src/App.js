@@ -10,7 +10,7 @@ import Atp from './pages/Atp';
 import Register from './pages/Register';
 import QualificationsPage from './pages/QualificationsPage';
 
-function App() {
+function App() {  
   return (
     <Router>
       {/* <Header /> */}

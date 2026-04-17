@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
-import { FaCheckCircle, FaTimesCircle, FaUser, FaHashtag, FaQrcode, FaEnvelope, FaShieldAlt, FaUniversity, FaBuilding, FaCalendar, FaBook } from 'react-icons/fa';
+import {
+  FaCheckCircle,
+  FaTimesCircle,
+  FaUser,
+  FaHashtag,
+  FaQrcode,
+  FaEnvelope,
+  FaShieldAlt,
+  FaUniversity,
+  FaBuilding,
+  FaCalendar,
+  FaBook,
+  FaDownload,
+  FaEye,
+} from 'react-icons/fa';
 import './CertificateVerification.css';
 
 const CertificateVerification = () => {
   const [fullName, setFullName] = useState('');
   const [certificateNumber, setCertificateNumber] = useState('');
   const [verificationResult, setVerificationResult] = useState(null);
+  const [certificateUrl, setCertificateUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -13,6 +28,7 @@ const CertificateVerification = () => {
     e.preventDefault();
     setIsLoading(true);
     setVerificationResult(null);
+    setCertificateUrl('');
     setError(null);
 
     try {
@@ -26,7 +42,7 @@ const CertificateVerification = () => {
         }));
         throw new Error(errorData.message);
       }
-      
+
       const data = await response.json();
 
       setVerificationResult({
@@ -38,6 +54,10 @@ const CertificateVerification = () => {
         atp: data.certificate.atp || 'OSHEQ Academy Pvt Ltd.',
       });
 
+      // certificateNumber state ko change nahi kiya gaya
+      setCertificateUrl(
+        `https://osheq-api.vercel.app/certificates/${encodeURIComponent(certificateNumber)}.pdf`
+      );
     } catch (err) {
       setError(err.message);
     } finally {
@@ -47,7 +67,6 @@ const CertificateVerification = () => {
 
   return (
     <div className="verification-page-container">
-      {/* Header Section */}
       <div className="header-section">
         <div className="header-content">
           <FaShieldAlt className="header-icon" />
@@ -57,19 +76,18 @@ const CertificateVerification = () => {
       </div>
 
       <div className="content-wrapper">
-        {/* Left Side - Information */}
         <div className="info-section">
           <div className="info-card">
             <h2>About Verification</h2>
             <p>
-              OSHEQ regularly receives requests from employers, recruitment agencies, 
-              Higher Education institutions, and other organizations to confirm that 
-              an individual holds a OSHEQ qualification. It is important to OSHEQ that 
-              organizations can validate qualifications so that you can maintain workplace 
+              OSHEQ regularly receives requests from employers, recruitment agencies,
+              Higher Education institutions, and other organizations to confirm that
+              an individual holds a OSHEQ qualification. It is important to OSHEQ that
+              organizations can validate qualifications so that you can maintain workplace
               safety.
             </p>
             <p className="warning-text">
-              We take all reports of fraudulent Certificates and Parchments very seriously, 
+              We take all reports of fraudulent Certificates and Parchments very seriously,
               and we advise all students to keep these documents secure to prevent fraud.
             </p>
 
@@ -80,7 +98,9 @@ const CertificateVerification = () => {
                 </div>
                 <div className="feature-content">
                   <h3>QR Code Verification</h3>
-                  <p>All Certificates and Parchments issued by OSHEQ include a QR code that can be scanned with a smartphone to verify authenticity.</p>
+                  <p>
+                    All Certificates and Parchments issued by OSHEQ include a QR code that can be scanned with a smartphone to verify authenticity.
+                  </p>
                 </div>
               </div>
 
@@ -90,7 +110,9 @@ const CertificateVerification = () => {
                 </div>
                 <div className="feature-content">
                   <h3>Online Verification</h3>
-                  <p>Using our free self-service verification platform, you can validate all Certificates and Parchments issued by OSHEQ.</p>
+                  <p>
+                    Using our free self-service verification platform, you can validate all Certificates and Parchments issued by OSHEQ.
+                  </p>
                 </div>
               </div>
 
@@ -100,14 +122,15 @@ const CertificateVerification = () => {
                 </div>
                 <div className="feature-content">
                   <h3>Direct Verification</h3>
-                  <p>If you have a copy of OSHEQ qualification parchment, we can verify through <strong>info@osheq.org</strong></p>
+                  <p>
+                    If you have a copy of OSHEQ qualification parchment, we can verify through <strong>info@osheq.org</strong>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right Side - Verification Form */}
         <div className="form-section">
           <div className="verification-card">
             <div className="card-header">
@@ -163,7 +186,6 @@ const CertificateVerification = () => {
             </form>
           </div>
 
-          {/* Results Section */}
           {error && (
             <div className="result-card error">
               <div className="result-header">
@@ -180,7 +202,7 @@ const CertificateVerification = () => {
                 <FaCheckCircle className="result-icon" />
                 <h3>Certificate Verified Successfully</h3>
               </div>
-              
+
               <div className="result-grid">
                 <div className="result-item">
                   <FaUser className="item-icon" />
@@ -189,7 +211,7 @@ const CertificateVerification = () => {
                     <p>{verificationResult.holderName}</p>
                   </div>
                 </div>
-                
+
                 <div className="result-item">
                   <FaHashtag className="item-icon" />
                   <div className="item-content">
@@ -197,7 +219,7 @@ const CertificateVerification = () => {
                     <p>{verificationResult.certificateNumber}</p>
                   </div>
                 </div>
-                
+
                 <div className="result-item">
                   <FaBook className="item-icon" />
                   <div className="item-content">
@@ -205,7 +227,7 @@ const CertificateVerification = () => {
                     <p>{verificationResult.courseName}</p>
                   </div>
                 </div>
-                
+
                 <div className="result-item">
                   <FaCalendar className="item-icon" />
                   <div className="item-content">
@@ -213,7 +235,7 @@ const CertificateVerification = () => {
                     <p>{verificationResult.issueDate}</p>
                   </div>
                 </div>
-                
+
                 <div className="result-item">
                   <FaBuilding className="item-icon" />
                   <div className="item-content">
@@ -222,6 +244,40 @@ const CertificateVerification = () => {
                   </div>
                 </div>
               </div>
+
+              {certificateUrl && (
+                <div className="certificate-preview-section">
+                  <div className="certificate-action-buttons">
+                    <a
+                      href={certificateUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="preview-btn"
+                    >
+                      <FaEye /> View Certificate
+                    </a>
+
+                    <a
+                      href={certificateUrl}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="download-btn"
+                    >
+                      <FaDownload /> Download Certificate
+                    </a>
+                  </div>
+
+                  <div className="certificate-preview-box">
+                    <iframe
+                      src={certificateUrl}
+                      title="Certificate Preview"
+                      width="100%"
+                      height="500px"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

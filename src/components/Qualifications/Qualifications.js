@@ -217,9 +217,9 @@ const allTrainingCategories = [
   },
   {
     id: 'membership',
-    title: 'OSHAS Membership',
+    title: 'OSHEQ Membership',
     courses: [
-      { id: 114, name: 'Chartered Member (CM-OSHAS)', description: 'Placeholder description...', tabs: { topics: [], audience: [], benefits: [], exam: [] } },
+      { id: 114, name: 'Chartered Member (CM-OSHEQ)', description: 'Placeholder description...', tabs: { topics: [], audience: [], benefits: [], exam: [] } },
     ]
   },
   {

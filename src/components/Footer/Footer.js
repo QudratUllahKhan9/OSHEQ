@@ -1,33 +1,34 @@
 import React from "react";
 import "./Footer.css";
-import footerLogo from "../Home/assets/img1.png"; // Replace with your logo path
-import { FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa";
+import footerLogo from "../Home/assets/Logo-01.png";
+import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="footer-container fade-in">
+    <footer className="footer-container">
       <div className="footer-top">
         <div className="footer-logo-section">
-          <img src={footerLogo} alt="Footer Logo" className="footer-logo" />
-          <p>
-            <strong>OSHEQ</strong> offers different qualifications of safety,
-            health, environment & quality, lowering incident rates for workers.
+          <div className="footer-logo-box">
+            <img src={footerLogo} alt="OSHEQ Logo" className="footer-logo" />
+          </div>
+
+          <p className="footer-description">
+            <strong>OSHEQ</strong> offers internationally focused safety,
+            health, environment, and quality qualifications that help reduce
+            workplace incidents and improve professional standards.
           </p>
         </div>
 
         <div className="footer-columns">
           <div className="footer-column">
             <h4>Company Info</h4>
-          <ul>
-  <li><Link to="/about">About Us</Link></li>
-  <li><Link to="/contact">Contact Us</Link></li>
-  {/* <li><Link to="/partner">Become A Partner</Link></li> */}
-  <li><Link to="/qualifications">Courses</Link></li>
-  <li><Link to="/verify">Verification</Link></li>
-  {/* <li><Link to="/blog">Blog</Link></li> */}
-</ul>
-
+            <ul>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/contact">Contact Us</Link></li>
+              <li><Link to="/qualifications">Courses</Link></li>
+              <li><Link to="/verify">Verification</Link></li>
+            </ul>
           </div>
 
           <div className="footer-column">
@@ -44,21 +45,47 @@ export default function Footer() {
           <div className="footer-column">
             <h4>Get in Touch</h4>
             <p>
-              With supporting text below as a natural lead-in to additional
-              content.
+              For course details, verification support, and general inquiries,
+              feel free to contact our team.
             </p>
             <p><strong>Established in 2007</strong></p>
+
             <div className="footer-socials">
-              <FaFacebook />
-              <FaTwitter />
-              <FaLinkedin />
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+              >
+                <FaFacebookF />
+              </a>
+
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Twitter"
+              >
+                <FaTwitter />
+              </a>
+
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedinIn />
+              </a>
             </div>
           </div>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} <strong>OSHEQ</strong>. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} <strong>OSHEQ</strong>. All rights reserved.
+        </p>
       </div>
     </footer>
   );

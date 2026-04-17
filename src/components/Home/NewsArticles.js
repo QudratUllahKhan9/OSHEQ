@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './NewsArticles.css';
 import img1 from './assets/qualification_1.webp';
-import img2 from './assets/qualification_1.webp';
-import img3 from './assets/qualification_1.webp';
-import img4 from './assets/qualification_1.webp';
-import img5 from './assets/qualification_1.webp';
-import img6 from './assets/qualification_1.webp';
+import img2 from './assets/qualification_2.webp';
+import img3 from './assets/qualification_3.webp';
+import img4 from './assets/qualification_4.webp';
+import img5 from './assets/qualification_5.webp';
+import img6 from './assets/qualification_6.webp';
 
 const articles = [
   { 
