@@ -26,8 +26,8 @@ const allTrainingCategories = [
     id: 'hazwoper',
     title: 'HAZWOPER',
     courses: [
-      { 
-        id: 11, 
+      {
+        id: 11,
         name: '8 Hours HAZWOPER Refresher Training',
         // --- Yeh data aapke screenshot se liya gaya hai ---
         description: 'Workers who perform cleanup, emergency response, or corrective actions involving the uncontrolled release of hazardous substances benefit greatly from HAZWOPER training because it provides essential safety and health information. This covers work on chemical fires, hazardous chemical leaks, and site preparation that unearths hidden hazardous waste.',
@@ -266,6 +266,11 @@ const allTrainingCategories = [
 ];
 
 
+const handleCourseClick = (e, course) => {
+  e.preventDefault();
+  console.log("Clicked course:", course);
+};
+
 // --- Detail Page Component (Screenshot ke mutabiq) ---
 const CourseDetailPage = ({ course, onBackClick }) => {
   const [activeTab, setActiveTab] = useState('topics'); // Default 'Topics Covered' active hoga
@@ -282,28 +287,28 @@ const CourseDetailPage = ({ course, onBackClick }) => {
         <button className="back-button" onClick={onBackClick}>
           <FaArrowLeft /> Back to All Courses
         </button>
-        
+
         <h1 className="course-title">{course.name}</h1>
         <p className="course-description">{course.description}</p>
 
         {/* --- Tabs Navigation --- */}
         <div className="course-tabs-nav">
-          <button 
+          <button
             className={activeTab === 'topics' ? 'active' : ''}
             onClick={() => setActiveTab('topics')}>
             Topics Covered
           </button>
-          <button 
+          <button
             className={activeTab === 'audience' ? 'active' : ''}
             onClick={() => setActiveTab('audience')}>
             Target Audience
           </button>
-          <button 
+          <button
             className={activeTab === 'benefits' ? 'active' : ''}
             onClick={() => setActiveTab('benefits')}>
             Benefits of the Program
           </button>
-          <button 
+          <button
             className={activeTab === 'exam' ? 'active' : ''}
             onClick={() => setActiveTab('exam')}>
             Exam Pattern
@@ -314,7 +319,7 @@ const CourseDetailPage = ({ course, onBackClick }) => {
         <div className="course-tabs-content">
           {activeTab === 'topics' && (
             <ul>
-              {hasTopics ? 
+              {hasTopics ?
                 course.tabs.topics.map((item, i) => <li key={i}>{item}</li>) :
                 <li>Details for this section are coming soon.</li>
               }
@@ -370,9 +375,9 @@ const Qualifications = () => {
   // --- Agar Course Select hua hai, to Detail Page dikhayein ---
   if (selectedCourse) {
     return (
-      <CourseDetailPage 
-        course={selectedCourse} 
-        onBackClick={handleBackClick} 
+      <CourseDetailPage
+        course={selectedCourse}
+        onBackClick={handleBackClick}
       />
     );
   }
@@ -381,15 +386,15 @@ const Qualifications = () => {
   return (
     <div className="simple-qualifications-page">
       <h1>POPULAR TRAINING CATEGORIES</h1>
-      
+
       {allTrainingCategories.map((category) => (
         <div key={category.id} className="category-section">
           <h2>{category.title}</h2>
           <ul className="course-list">
             {category.courses.map((course) => (
               <li key={course.id}>
-                <a 
-                  href="#" 
+                <a
+                  href="/"
                   onClick={(e) => handleCourseClick(e, course)}
                 >
                   {course.name}
