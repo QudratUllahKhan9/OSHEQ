@@ -2,6 +2,9 @@
   "name": "osheq",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "25.8.2"
+  },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.11",
     "@testing-library/dom": "^10.4.0",
