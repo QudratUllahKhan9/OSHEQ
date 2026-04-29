@@ -4,8 +4,6 @@ import Home from './pages/Home';
 import Contact from './pages/Contact';
 import AboutUs from './pages/AboutUs';
 import Verification from './pages/Verification';
-// import Qualifications from './pages/Qualifications';
-// import ATP from './pages/ATP';
 import Atp from './pages/Atp';
 import Register from './pages/Register';
 import QualificationsPage from './pages/QualificationsPage';
@@ -13,7 +11,7 @@ import QualificationsPage from './pages/QualificationsPage';
 function App() {  
   return (
     <Router>
-      {/* <Header /> */}
+      
       <Routes>
         <Route path="/atp" element={<Atp />} />
 
