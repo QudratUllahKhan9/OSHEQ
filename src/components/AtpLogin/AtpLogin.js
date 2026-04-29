@@ -18,7 +18,7 @@ const AtpLogin = () => {
     }
 
     setErrorMsg('');
-    // Simulate successful login
+
     navigate('/');
   };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './HeroSection.css';
 import slider2 from './assets/slider2.png';
-import { FaPlay, FaArrowRight, FaGraduationCap, FaUsers, FaAward } from 'react-icons/fa';
+import { FaArrowRight, FaGraduationCap } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 export default function HeroSection() {

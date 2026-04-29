@@ -1,6 +1,5 @@
 import React from 'react'
 import './Body.css'
-import { FaShieldAlt, FaGraduationCap, FaUserCheck, FaGlobeAmericas, FaAward, FaHandsHelping } from 'react-icons/fa'
 
 export default function Body() {
   return (

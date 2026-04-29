@@ -6,11 +6,11 @@ import AtpLogin from '../components/AtpLogin/AtpLogin'
 export default function Atp() {
   return (
     <div>
-    {/* <Header/> */}
+   
     <main>
 <AtpLogin/>
     </main>
-      {/* <Footer/> */}
+      
     </div>
   )
 }

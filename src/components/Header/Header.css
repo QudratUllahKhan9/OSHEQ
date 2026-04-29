@@ -13,7 +13,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 a { text-decoration: none; color: inherit; }
 
-/* ── Contact Bar ── */
+
 .contact-bar {
   background: linear-gradient(90deg, #003366 0%, #005599 100%);
   color: var(--white);
@@ -58,10 +58,10 @@ a { text-decoration: none; color: inherit; }
   background: rgba(255,255,255,0.25);
 }
 
-/* ── Main Nav ── */
+
 .header {
   width: 100%;
-  /* position: sticky; */
+
   top: 0;
   z-index: 1000;
   transition: var(--transition);
@@ -86,7 +86,7 @@ a { text-decoration: none; color: inherit; }
 
 
 .logo img {
-  height: 120px;        /* ← yahan number badhao */
+  height: 120px;        
   width: auto;
   object-fit: contain;
   transition: var(--transition);
@@ -95,7 +95,7 @@ a { text-decoration: none; color: inherit; }
 
 .logo:hover img { transform: scale(1.04); }
 
-/* ── Desktop Nav ── */
+
 .desktop-nav ul {
   display: flex;
   align-items: center;
@@ -242,7 +242,7 @@ a { text-decoration: none; color: inherit; }
   color: white;
 }
 
-/* ── Highlight CTA Button ── */
+
 .highlight a {
   background: linear-gradient(135deg, var(--primary) 0%, #005599 100%) !important;
   color: var(--white) !important;
