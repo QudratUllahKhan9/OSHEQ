@@ -266,10 +266,6 @@ const allTrainingCategories = [
 ];
 
 
-const handleCourseClick = (e, course) => {
-  e.preventDefault();
-  console.log("Clicked course:", course);
-};
 
 // --- Detail Page Component (Screenshot ke mutabiq) ---
 const CourseDetailPage = ({ course, onBackClick }) => {
