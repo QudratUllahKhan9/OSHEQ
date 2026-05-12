@@ -58,8 +58,8 @@ const ContactSection = () => {
             <div className="info-icon">
               <FaPhone />
             </div>
-            <h3>Phone</h3>
-            <p>+1 (123) 456-7890</p>
+            {/* <h3>Phone</h3>
+            <p>+1 (123) 456-7890</p> */}
           </div>
 
           <div className="info-card animate-card">

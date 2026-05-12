@@ -27,8 +27,8 @@ export default function Header() {
               info@osheq.us
             </a>
             <a href="tel:+13022041194">
-              <FaPhone className="icon" />
-              +1 (302) 204-1194
+              {/* <FaPhone className="icon" /> */}
+              {/* +1 (302) 204-1194 */}
             </a>
           </div>
         </div>
