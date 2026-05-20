@@ -2,36 +2,50 @@
    1. MAIN SECTION & CONTAINER
    ========================================= */
 .news-section {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 100px 0;
+  background-color: #f8f9fa; /* Light theme matching */
   position: relative;
-  overflow: hidden; /* Background overflow rokne ke liye */
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
 }
 
 .news-container {
-  max-width: 90%;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
+/* =========================================
+   2. HEADER STYLES (Matched with Theme)
+   ========================================= */
 .news-header {
   text-align: center;
   margin-bottom: 60px;
 }
 
-.news-title {
-  font-size: 3rem;
+.news-header .sub-heading {
+  display: inline-block;
+  color: #00c0ff;
+  font-size: 14px;
   font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 15px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  background: rgba(0, 192, 255, 0.1);
+  padding: 6px 16px;
+  border-radius: 50px;
 }
 
-.news-subtitle {
-  font-size: 1.2rem;
+.news-header h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #003366;
+  margin-bottom: 15px;
+  letter-spacing: -0.5px;
+}
+
+.news-header .section-subtitle {
+  font-size: 1.15rem;
   color: #6c757d;
   max-width: 600px;
   margin: 0 auto;
@@ -39,7 +53,7 @@
 }
 
 /* =========================================
-   2. GRID & CARD DESIGN
+   3. GRID & CARD DESIGN
    ========================================= */
 .news-grid {
   display: grid;
@@ -49,25 +63,25 @@
 }
 
 .news-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 51, 102, 0.05);
+  border: 1px solid rgba(0, 51, 102, 0.04);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* Animation */
   opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
+  animation: fadeInUp 0.8s ease forwards;
 }
 
 .news-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 51, 102, 0.12);
+  border-color: rgba(0, 192, 255, 0.3);
 }
 
-/* Card Animation Delays */
 .news-card:nth-child(1) { animation-delay: 0.1s; }
 .news-card:nth-child(2) { animation-delay: 0.2s; }
 .news-card:nth-child(3) { animation-delay: 0.3s; }
@@ -76,11 +90,11 @@
 .news-card:nth-child(6) { animation-delay: 0.6s; }
 
 /* =========================================
-   3. CARD IMAGES & CONTENT
+   4. CARD IMAGES & CONTENT
    ========================================= */
 .news-image-container {
   position: relative;
-  height: 220px;
+  height: 240px;
   overflow: hidden;
 }
 
@@ -88,39 +102,43 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  transition: transform 0.5s ease;
 }
 
 .news-card:hover .news-img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .news-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 100%);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0, 51, 102, 0.7) 100%);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.news-card:hover .news-overlay {
+  opacity: 0.8;
 }
 
 .news-category {
   position: absolute;
   top: 15px;
   left: 15px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: #00c0ff;
   color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
+  padding: 6px 14px;
+  border-radius: 50px;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   z-index: 2;
+  box-shadow: 0 4px 15px rgba(0, 192, 255, 0.3);
 }
 
 .news-content {
-  padding: 25px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -130,38 +148,59 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  font-size: 0.85rem;
+  margin-bottom: 18px;
+  font-size: 0.9rem;
 }
 
 .news-date {
-  color: #667eea;
+  color: #003366;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .news-read-time {
   color: #6c757d;
-  background: #f8f9fa;
-  padding: 4px 8px;
+  background: #f1f5f9;
+  padding: 4px 10px;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.meta-icon {
+  color: #00c0ff;
+}
+
+.meta-icon-white {
+  color: #00c0ff; /* Icon inside modal badge */
 }
 
 .news-heading {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: #003366;
   margin-bottom: 12px;
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.news-card:hover .news-heading {
+  color: #00c0ff;
 }
 
 .news-desc {
-  color: #555;
+  color: #6c757d;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   flex-grow: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -170,7 +209,7 @@
 }
 
 /* =========================================
-   4. BUTTONS
+   5. BUTTONS
    ========================================= */
 .news-footer {
   margin-top: auto;
@@ -180,20 +219,22 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #003366 0%, #005599 100%);
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: 50px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 15px rgba(0, 51, 102, 0.15);
 }
 
 .read-btn:hover {
-  transform: translateX(5px);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #00c0ff 0%, #0080cc 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 192, 255, 0.3);
 }
 
 .btn-arrow {
@@ -201,20 +242,17 @@
 }
 
 .read-btn:hover .btn-arrow {
-  transform: translateX(3px);
+  transform: translateX(5px);
 }
 
 /* =========================================
-   5. MODAL (POPUP) STYLES
+   6. MODAL (POPUP) STYLES
    ========================================= */
 .news-modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.85); /* Dark background */
-  backdrop-filter: blur(8px); /* Blur effect */
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 51, 102, 0.85); 
+  backdrop-filter: blur(8px);
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -224,47 +262,46 @@
 }
 
 .news-modal-content {
-  background: white;
+  background: #ffffff;
   width: 100%;
-  max-width: 800px;
+  max-width: 850px;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  max-height: 90vh; /* Screen height ka 90% */
-  overflow-y: auto; /* Scrollable */
-  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+  max-height: 90vh; 
+  overflow-y: auto; 
+  animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .news-modal-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: rgba(255, 255, 255, 0.9);
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 51, 102, 0.05);
   border: none;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  font-size: 24px;
+  font-size: 1.2rem;
   cursor: pointer;
   z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   transition: all 0.2s ease;
-  color: #333;
+  color: #6c757d;
 }
 
 .news-modal-close:hover {
-  background: white;
-  transform: scale(1.1);
-  color: #ff4757;
+  background: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+  transform: rotate(90deg);
 }
 
 .news-modal-header {
   position: relative;
-  height: 350px; /* Badi image */
+  height: 380px;
   width: 100%;
 }
 
@@ -276,25 +313,28 @@
 
 .news-modal-badges {
   position: absolute;
-  bottom: 20px;
-  left: 25px;
+  bottom: 25px;
+  left: 30px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
   z-index: 2;
 }
 
-/* Modal ke andar category ka style thoda alag ho sakta hai agar chahein */
 .news-modal-badges .news-category {
-  position: static; /* Absolute hataya taake flex kaam kare */
+  position: static; 
 }
 
 .news-modal-badges .news-read-time {
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: #003366;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .news-modal-body {
@@ -302,22 +342,27 @@
 }
 
 .news-modal-body .news-date {
-  display: block;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: #003366;
+  font-weight: 600;
 }
 
 .news-modal-body h2 {
-  font-size: 2.4rem;
-  color: #2c3e50;
+  font-size: 2.5rem;
+  color: #003366;
   margin: 0 0 20px 0;
   line-height: 1.2;
+  font-weight: 800;
 }
 
 .news-divider {
   height: 4px;
-  width: 60px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  width: 80px;
+  background: linear-gradient(135deg, #003366, #00c0ff);
   border-radius: 2px;
   margin-bottom: 30px;
 }
@@ -326,14 +371,14 @@
   font-size: 1.1rem;
   line-height: 1.8;
   color: #4a5568;
-  white-space: pre-line; /* Paragraph breaks ke liye zaroori */
+  white-space: pre-line; 
 }
 
 /* =========================================
-   6. ANIMATIONS
+   7. ANIMATIONS
    ========================================= */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -343,85 +388,37 @@
 }
 
 @keyframes slideUp {
-  from { transform: translateY(50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from { transform: translateY(50px) scale(0.95); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
 /* =========================================
-   7. RESPONSIVE DESIGN
+   8. RESPONSIVE DESIGN
    ========================================= */
+@media (max-width: 1024px) {
+  .news-header h2 { font-size: 2.6rem; }
+  .news-grid { gap: 20px; }
+}
 
-/* Tablet & Mobile */
 @media (max-width: 768px) {
-  .news-section {
-    padding: 60px 0;
-  }
-
-  .news-title {
-    font-size: 2.2rem;
-  }
-
-  .news-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-  }
-
-  .news-container {
-    max-width: 95%;
-    padding: 0 15px;
-  }
-
-  /* Modal Responsive */
-  .news-modal-header {
-    height: 200px;
-  }
-
-  .news-modal-body {
-    padding: 25px;
-  }
-
-  .news-modal-body h2 {
-    font-size: 1.6rem;
-  }
-
-  .news-full-text {
-    font-size: 1rem;
-  }
-}
-
-/* Small Mobile */
-@media (max-width: 480px) {
-  .news-title {
-    font-size: 1.8rem;
-  }
-
-  .news-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .news-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
+  .news-section { padding: 60px 0; }
+  .news-header h2 { font-size: 2.2rem; }
+  .news-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto 50px; }
   
-  .news-modal-content {
-    border-radius: 15px;
-  }
+  .news-modal-header { height: 250px; }
+  .news-modal-body { padding: 30px; }
+  .news-modal-body h2 { font-size: 1.8rem; }
 }
 
-/* Print Styles */
-@media print {
-  .news-section {
-    background: white !important;
-    padding: 40px 0 !important;
-  }
-  .news-card {
-    break-inside: avoid;
-    box-shadow: none !important;
-    border: 1px solid #ddd;
-  }
-  .read-btn, .news-modal-overlay {
-    display: none; /* Print mein button aur modal na aaye */
-  }
+@media (max-width: 480px) {
+  .news-header h2 { font-size: 1.8rem; }
+  .news-image-container { height: 200px; }
+  .news-content { padding: 20px; }
+  .news-heading { font-size: 1.2rem; }
+  
+  .news-modal-content { border-radius: 16px; }
+  .news-modal-header { height: 200px; }
+  .news-modal-body { padding: 25px 20px; }
+  .news-modal-body h2 { font-size: 1.5rem; }
+  .news-modal-badges { left: 15px; bottom: 15px; }
 }

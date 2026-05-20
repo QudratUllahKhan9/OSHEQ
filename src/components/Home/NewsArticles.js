@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './NewsArticles.css';
+import { FaArrowRight, FaTimes, FaCalendarAlt, FaRegClock } from 'react-icons/fa';
 import img1 from './assets/qualification_1.webp';
 import img2 from './assets/qualification_2.webp';
 import img3 from './assets/qualification_3.webp';
@@ -69,26 +70,28 @@ export default function NewsArticles() {
 
   const handleReadMore = (article) => {
     setSelectedArticle(article);
-    // Optional: Stop background scrolling
     document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setSelectedArticle(null);
-    // Restore background scrolling
     document.body.style.overflow = 'unset';
   };
 
   return (
-    <div className="news-section" id="news">
-      <div className="news-container">
-        <div className="news-header">
-          <h2 className="news-title">Latest News & Articles</h2>
-          <p className="news-subtitle">
+    <section className="news-section" id="news">
+      <div className="container news-container">
+        
+        {/* Header Section */}
+        <div className="section-header news-header">
+          <span className="sub-heading">Insights & Updates</span>
+          <h2>Latest News & Articles</h2>
+          <p className="section-subtitle">
             Stay updated with the latest insights, trends, and best practices in occupational safety and health management.
           </p>
         </div>
         
+        {/* Grid Section */}
         <div className="news-grid">
           {articles.map((item, idx) => (
             <div className="news-card" key={idx}>
@@ -100,8 +103,12 @@ export default function NewsArticles() {
               
               <div className="news-content">
                 <div className="news-meta">
-                  <span className="news-date">{item.date}</span>
-                  <span className="news-read-time">{item.readTime}</span>
+                  <span className="news-date">
+                    <FaCalendarAlt className="meta-icon" /> {item.date}
+                  </span>
+                  <span className="news-read-time">
+                    <FaRegClock className="meta-icon" /> {item.readTime}
+                  </span>
                 </div>
                 
                 <h3 className="news-heading">{item.title}</h3>
@@ -110,9 +117,7 @@ export default function NewsArticles() {
                 <div className="news-footer">
                   <button className="read-btn" onClick={() => handleReadMore(item)}>
                     Read More
-                    <svg className="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <FaArrowRight className="btn-arrow" />
                   </button>
                 </div>
               </div>
@@ -125,26 +130,34 @@ export default function NewsArticles() {
       {selectedArticle && (
         <div className="news-modal-overlay" onClick={closeModal}>
           <div className="news-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="news-modal-close" onClick={closeModal}>&times;</button>
+            
+            <button className="news-modal-close" onClick={closeModal}>
+              <FaTimes />
+            </button>
             
             <div className="news-modal-header">
               <img src={selectedArticle.img} alt={selectedArticle.title} className="news-modal-img" />
               <div className="news-modal-badges">
                 <span className="news-category">{selectedArticle.category}</span>
-                <span className="news-read-time">{selectedArticle.readTime}</span>
+                <span className="news-read-time">
+                  <FaRegClock className="meta-icon-white" /> {selectedArticle.readTime}
+                </span>
               </div>
             </div>
 
             <div className="news-modal-body">
-              <span className="news-date">{selectedArticle.date}</span>
+              <span className="news-date">
+                <FaCalendarAlt className="meta-icon" /> {selectedArticle.date}
+              </span>
               <h2>{selectedArticle.title}</h2>
               <div className="news-divider"></div>
               <p className="news-full-text">{selectedArticle.fullContent}</p>
             </div>
+            
           </div>
         </div>
       )}
 
-    </div>
+    </section>
   );
 }

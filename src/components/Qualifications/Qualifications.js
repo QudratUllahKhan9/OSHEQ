@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-// Detail page ke liye sirf 'FaArrowLeft' icon ki zaroorat hai
-import { FaArrowLeft } from 'react-icons/fa';
-import './Qualifications.css'; // Dono pages ke styles isi file mein honge
+import { FaArrowLeft, FaChevronRight, FaCheckCircle, FaGraduationCap } from 'react-icons/fa';
+import './Qualifications.css';
 
-// --- YEH AAPKA POORA NAYA DATA HAI ---
-// Is data mein har course ke andar details mojood hain
+// --- ALL TRAINING CATEGORIES DATA ---
 const allTrainingCategories = [
   {
     id: 'general-industry',
@@ -29,7 +27,6 @@ const allTrainingCategories = [
       {
         id: 11,
         name: '8 Hours HAZWOPER Refresher Training',
-        // --- Yeh data aapke screenshot se liya gaya hai ---
         description: 'Workers who perform cleanup, emergency response, or corrective actions involving the uncontrolled release of hazardous substances benefit greatly from HAZWOPER training because it provides essential safety and health information. This covers work on chemical fires, hazardous chemical leaks, and site preparation that unearths hidden hazardous waste.',
         tabs: {
           topics: [
@@ -266,140 +263,136 @@ const allTrainingCategories = [
 ];
 
 
-
-// --- Detail Page Component (Screenshot ke mutabiq) ---
+// --- DETAIL PAGE COMPONENT ---
 const CourseDetailPage = ({ course, onBackClick }) => {
-  const [activeTab, setActiveTab] = useState('topics'); // Default 'Topics Covered' active hoga
+  const [activeTab, setActiveTab] = useState('topics');
 
-  // Check karne ke liye ke data mojood hai ya nahi
   const hasTopics = course.tabs.topics && course.tabs.topics.length > 0;
   const hasAudience = course.tabs.audience && course.tabs.audience.length > 0;
   const hasBenefits = course.tabs.benefits && course.tabs.benefits.length > 0;
   const hasExam = course.tabs.exam && course.tabs.exam.length > 0;
 
   return (
-    <div className="course-detail-page">
+    <div className="course-detail-wrapper fadeIn">
       <div className="container">
         <button className="back-button" onClick={onBackClick}>
-          <FaArrowLeft /> Back to All Courses
+          <FaArrowLeft /> Back to All Categories
         </button>
 
-        <h1 className="course-title">{course.name}</h1>
-        <p className="course-description">{course.description}</p>
-
-        {/* --- Tabs Navigation --- */}
-        <div className="course-tabs-nav">
-          <button
-            className={activeTab === 'topics' ? 'active' : ''}
-            onClick={() => setActiveTab('topics')}>
-            Topics Covered
-          </button>
-          <button
-            className={activeTab === 'audience' ? 'active' : ''}
-            onClick={() => setActiveTab('audience')}>
-            Target Audience
-          </button>
-          <button
-            className={activeTab === 'benefits' ? 'active' : ''}
-            onClick={() => setActiveTab('benefits')}>
-            Benefits of the Program
-          </button>
-          <button
-            className={activeTab === 'exam' ? 'active' : ''}
-            onClick={() => setActiveTab('exam')}>
-            Exam Pattern
-          </button>
+        {/* Hero Header for Details */}
+        <div className="detail-hero-card">
+          <div className="hero-content">
+            <span className="course-badge">Course Details</span>
+            <h1 className="course-title">{course.name}</h1>
+            <p className="course-description">{course.description}</p>
+          </div>
         </div>
 
-        {/* --- Tabs Content --- */}
-        <div className="course-tabs-content">
-          {activeTab === 'topics' && (
-            <ul>
-              {hasTopics ?
-                course.tabs.topics.map((item, i) => <li key={i}>{item}</li>) :
-                <li>Details for this section are coming soon.</li>
-              }
-            </ul>
-          )}
-          {activeTab === 'audience' && (
-            <ul>
-              {hasAudience ?
-                course.tabs.audience.map((item, i) => <li key={i}>{item}</li>) :
-                <li>Details for this section are coming soon.</li>
-              }
-            </ul>
-          )}
-          {activeTab === 'benefits' && (
-            <ul>
-              {hasBenefits ?
-                course.tabs.benefits.map((item, i) => <li key={i}>{item}</li>) :
-                <li>Details for this section are coming soon.</li>
-              }
-            </ul>
-          )}
-          {activeTab === 'exam' && (
-            <ul>
-              {hasExam ?
-                course.tabs.exam.map((item, i) => <li key={i}>{item}</li>) :
-                <li>Details for this section are coming soon.</li>
-              }
-            </ul>
-          )}
+        {/* Tabs Section */}
+        <div className="course-tabs-container">
+          <div className="course-tabs-nav">
+            <button className={activeTab === 'topics' ? 'active' : ''} onClick={() => setActiveTab('topics')}>
+              Topics Covered
+            </button>
+            <button className={activeTab === 'audience' ? 'active' : ''} onClick={() => setActiveTab('audience')}>
+              Target Audience
+            </button>
+            <button className={activeTab === 'benefits' ? 'active' : ''} onClick={() => setActiveTab('benefits')}>
+              Benefits
+            </button>
+            <button className={activeTab === 'exam' ? 'active' : ''} onClick={() => setActiveTab('exam')}>
+              Exam Pattern
+            </button>
+          </div>
+
+          <div className="course-tabs-content">
+            {activeTab === 'topics' && (
+              <ul className="custom-list">
+                {hasTopics ? course.tabs.topics.map((item, i) => (
+                  <li key={i}><FaCheckCircle className="list-icon" /> {item}</li>
+                )) : <li><FaCheckCircle className="list-icon" /> Details for this section are coming soon.</li>}
+              </ul>
+            )}
+            {activeTab === 'audience' && (
+              <ul className="custom-list">
+                {hasAudience ? course.tabs.audience.map((item, i) => (
+                  <li key={i}><FaCheckCircle className="list-icon" /> {item}</li>
+                )) : <li><FaCheckCircle className="list-icon" /> Details for this section are coming soon.</li>}
+              </ul>
+            )}
+            {activeTab === 'benefits' && (
+              <ul className="custom-list">
+                {hasBenefits ? course.tabs.benefits.map((item, i) => (
+                  <li key={i}><FaCheckCircle className="list-icon" /> {item}</li>
+                )) : <li><FaCheckCircle className="list-icon" /> Details for this section are coming soon.</li>}
+              </ul>
+            )}
+            {activeTab === 'exam' && (
+              <ul className="custom-list">
+                {hasExam ? course.tabs.exam.map((item, i) => (
+                  <li key={i}><FaCheckCircle className="list-icon" /> {item}</li>
+                )) : <li><FaCheckCircle className="list-icon" /> Details for this section are coming soon.</li>}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-
-// --- Main Qualifications Component (Simple List) ---
+// --- MAIN QUALIFICATIONS (LIST) COMPONENT ---
 const Qualifications = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
-  // Jab user course pe click karega
   const handleCourseClick = (e, course) => {
-    e.preventDefault(); // Link ko follow karne se rokein
+    e.preventDefault();
     setSelectedCourse(course);
-    window.scrollTo(0, 0); // Page ko upar scroll karein
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Jab user "Back" button dabaye ga
   const handleBackClick = () => {
     setSelectedCourse(null);
   };
 
-  // --- Agar Course Select hua hai, to Detail Page dikhayein ---
   if (selectedCourse) {
-    return (
-      <CourseDetailPage
-        course={selectedCourse}
-        onBackClick={handleBackClick}
-      />
-    );
+    return <CourseDetailPage course={selectedCourse} onBackClick={handleBackClick} />;
   }
 
-  // --- Warna, Simple List Page dikhayein (Aapke code ke mutabiq) ---
   return (
-    <div className="simple-qualifications-page">
-      <h1>POPULAR TRAINING CATEGORIES</h1>
-
-      {allTrainingCategories.map((category) => (
-        <div key={category.id} className="category-section">
-          <h2>{category.title}</h2>
-          <ul className="course-list">
-            {category.courses.map((course) => (
-              <li key={course.id}>
-                <a
-                  href="/"
-                  onClick={(e) => handleCourseClick(e, course)}
-                >
-                  {course.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+    <div className="qualifications-page-wrapper fadeIn">
+      <div className="container">
+        
+        <div className="section-header text-center">
+          <span className="sub-heading">Global Certifications</span>
+          <h1 className="page-main-title">Popular Training Categories</h1>
+          <p className="page-subtitle">Explore our comprehensive range of safety, health, environment, and quality courses designed for professionals worldwide.</p>
         </div>
-      ))}
+
+        <div className="categories-grid">
+          {allTrainingCategories.map((category) => (
+            <div key={category.id} className="category-card">
+              <div className="category-card-header">
+                <div className="icon-wrapper">
+                  <FaGraduationCap />
+                </div>
+                <h2>{category.title}</h2>
+              </div>
+              <ul className="course-list">
+                {category.courses.map((course) => (
+                  <li key={course.id}>
+                    <button onClick={(e) => handleCourseClick(e, course)} className="course-link">
+                      <span className="course-name">{course.name}</span>
+                      <FaChevronRight className="course-arrow" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+      </div>
     </div>
   );
 };

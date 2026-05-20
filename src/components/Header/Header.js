@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
 import logo from "./assets/img3.png";
-import { FaPhone, FaEnvelope, FaChevronDown, FaUserTie, FaShieldAlt } from "react-icons/fa";
+import { FaEnvelope, FaChevronDown, FaUserTie, FaShieldAlt } from "react-icons/fa";
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
-  const [isAtpOpen, setIsAtpOpen]           = useState(false);
+  const [isAtpOpen, setIsAtpOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  useEffect(() => { setMobileMenuOpen(false); }, [location]);
+  // Route change hone par mobile menu automatically close ho jayega
+  useEffect(() => { 
+    setMobileMenuOpen(false); 
+    setIsAtpOpen(false);
+  }, [location]);
 
   return (
     <header className="header">
-
       {/* ── Top Contact Bar ── */}
       <div className="contact-bar">
         <div className="container">
           <div className="contact-info">
             <span className="contact-badge">
-              <FaShieldAlt /> OSHA Certified
+              <FaShieldAlt className="icon-shield" /> OSHA Certified
             </span>
+            <div className="contact-divider"></div>
             <a href="mailto:info@osheq.us">
-              <FaEnvelope className="icon" />
-              info@osheq.us
-            </a>
-            <a href="tel:+13022041194">
-              {/* <FaPhone className="icon" /> */}
-              {/* +1 (302) 204-1194 */}
+              <FaEnvelope className="icon" /> info@osheq.us
             </a>
           </div>
         </div>
@@ -38,14 +37,10 @@ export default function Header() {
       <div className="main-nav">
         <div className="container">
           <div className="nav-wrapper">
-
+            
             {/* Logo */}
             <Link to="/" className="logo">
               <img src={logo} alt="OSHEQ Logo" />
-              {/* <div className="logo-text">
-                <span className="logo-title">OSHEQ</span>
-                <span className="logo-sub">Safety Excellence</span>
-              </div> */}
             </Link>
 
             {/* Desktop Nav */}
@@ -64,7 +59,7 @@ export default function Header() {
                   </span>
                   {isAtpOpen && (
                     <div className="dropdown-content">
-                      <Link to="/atp">
+                      <Link to="/BecomeATP">
                         <span className="drop-icon"><FaUserTie /></span>
                         ATP Details
                       </Link>
@@ -79,13 +74,13 @@ export default function Header() {
               </ul>
             </nav>
 
-            {/* Mobile Toggle */}
+            {/* Mobile Toggle Button */}
             <button
               className="mobile-menu-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <HiX size={22} /> : <HiOutlineMenuAlt3 size={22} />}
+              {mobileMenuOpen ? <HiX size={26} /> : <HiOutlineMenuAlt3 size={26} />}
             </button>
           </div>
         </div>
@@ -99,7 +94,7 @@ export default function Header() {
 
               <li>
                 <button
-                  className="dropdown-trigger"
+                  className="dropdown-trigger mobile-dropdown-btn"
                   onClick={() => setIsAtpOpen(!isAtpOpen)}
                 >
                   ATP <FaChevronDown className={`chevron ${isAtpOpen ? "open" : ""}`} />

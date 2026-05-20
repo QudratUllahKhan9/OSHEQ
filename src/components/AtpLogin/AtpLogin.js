@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaUser, FaLock, FaSignInAlt } from 'react-icons/fa';
+import { FaUser, FaLock, FaSignInAlt, FaUserShield } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './AtpLogin.css';
 
@@ -11,15 +11,12 @@ const AtpLogin = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
     if (!email || !password) {
       setErrorMsg('Please enter both email and password.');
       return;
     }
-
     setErrorMsg('');
-
-    navigate('/');
+    navigate('/'); // Success hone par dashboard par bhejein
   };
 
   return (
@@ -27,25 +24,23 @@ const AtpLogin = () => {
       <div className="atp-login-card">
         <div className="login-header">
           <div className="login-icon">
-            <FaUser />
+            <FaUserShield /> {/* Naya icon */}
           </div>
-          <h2>Certificate Portal Login</h2>
-          <p>Enter your credentials to access your ATP dashboard</p>
+          <h2>ATP Portal Login</h2>
+          <p>Access your authorized training provider dashboard</p>
         </div>
 
         <form className="login-form" onSubmit={handleLogin}>
           {errorMsg && <div className="login-error">{errorMsg}</div>}
 
           <div className="input-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email Address</label>
             <div className="input-with-icon">
-              <span className="input-icon">
-                <FaUser />
-              </span>
+              <FaUser className="input-icon" />
               <input
                 type="email"
                 id="email"
-                placeholder="Enter email"
+                placeholder="provider@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -55,9 +50,7 @@ const AtpLogin = () => {
           <div className="input-group">
             <label htmlFor="password">Password</label>
             <div className="input-with-icon">
-              <span className="input-icon">
-                <FaLock />
-              </span>
+              <FaLock className="input-icon" />
               <input
                 type="password"
                 id="password"
@@ -69,13 +62,12 @@ const AtpLogin = () => {
           </div>
 
           <button type="submit" className="login-btn">
-            <FaSignInAlt className="btn-icon" />
-            Login
+            <FaSignInAlt /> Login Securely
           </button>
         </form>
 
         <div className="login-footer">
-          © {new Date().getFullYear()} ATP Certificate System
+          © {new Date().getFullYear()} OSHEQ Certification Portal
         </div>
       </div>
     </div>

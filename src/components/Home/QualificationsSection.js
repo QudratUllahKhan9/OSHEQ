@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "./QualificationsSection.css";
-import img1 from '../Home/assets/qualification_1.webp'
-import img2 from '../Home/assets/qualification_2.webp'
-import img3 from '../Home/assets/qualification_3.webp'
-import img4 from '../Home/assets/qualification_4.webp'
-import img5 from '../Home/assets/qualification5.webp'
-import img6 from '../Home/assets/qualification_6.webp'
+import img1 from '../Home/assets/qualification_1.webp';
+import img2 from '../Home/assets/qualification_2.webp';
+import img3 from '../Home/assets/qualification_3.webp';
+import img4 from '../Home/assets/qualification_4.webp';
+import img5 from '../Home/assets/qualification5.webp';
+import img6 from '../Home/assets/qualification_6.webp';
 import { useNavigate } from "react-router-dom";
+import { FaCheckCircle, FaArrowRight, FaTimes } from "react-icons/fa";
 
-// Data (Translated to English)
+// Data
 const qualifications = [
   {
     title: "OSHEQ 10 Hours",
@@ -74,7 +75,7 @@ const qualifications = [
     title: "OSHEQ 132 Hours",
     desc: "OSH Professional - Master level occupational safety certification",
     img: img5,
-   badge: "Expert",
+    badge: "Expert",
     modalTitle: "Detailed: OSHEQ 132 Hours Professional",
     modalDesc: "This master-level certification is our most comprehensive program in occupational safety and health. It covers strategic planning, corporate safety management systems, and global standards.",
     modalDetails: [
@@ -106,13 +107,8 @@ export default function QualificationsSection() {
   const [selectedCard, setSelectedCard] = useState(null);
   const navigate = useNavigate();
 
-  const handleCardClick = (item) => {
-    setSelectedCard(item);
-  };
-
-  const closeModal = () => {
-    setSelectedCard(null);
-  };
+  const handleCardClick = (item) => setSelectedCard(item);
+  const closeModal = () => setSelectedCard(null);
 
   const handleApplyNow = () => {
     navigate('/contact', { state: { courseName: selectedCard.title } });
@@ -123,14 +119,17 @@ export default function QualificationsSection() {
   };
 
   return (
-    <div className="qualifications-section" id="qualifications">
-      <div className="qualifications-container">
+    <section className="qualifications-section" id="qualifications">
+      <div className="container qualifications-container">
         
+        {/* Section Header */}
         <div className="section-title">
+          <span className="sub-heading">Global Certifications</span>
           <h2>Our Professional Qualifications</h2>
-          <p className="section-subtitle">Globally recognized certifications designed to advance your career.</p>
+          <p className="section-subtitle">Globally recognized certifications designed to advance your career and ensure workplace safety.</p>
         </div>
 
+        {/* Cards Grid */}
         <div className="cards-wrapper">
           {qualifications.map((item, index) => (
             <div
@@ -140,6 +139,7 @@ export default function QualificationsSection() {
               onClick={() => handleCardClick(item)}
             >
               <div className="card-badge">{item.badge}</div>
+              <div className="card-overlay"></div>
               <div className="card-content">
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
@@ -148,17 +148,24 @@ export default function QualificationsSection() {
           ))}
         </div>
 
+        {/* Bottom Call to Action */}
         <div className="qualifications-cta">
           <p>Ready to advance your safety career with OSHEQ certifications?</p>
-          <button className="cta-button" onClick={handleExploreAll}>Explore All Qualifications</button>
+          <button className="cta-button" onClick={handleExploreAll}>
+            Explore All Qualifications
+            <FaArrowRight className="cta-icon" />
+          </button>
         </div>
       </div>
 
+      {/* Modal */}
       {selectedCard && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             
-            <button className="modal-close-btn" onClick={closeModal}>&times;</button>
+            <button className="modal-close-btn" onClick={closeModal}>
+              <FaTimes />
+            </button>
 
             <div className="modal-body">
               <div className="modal-image-col">
@@ -172,20 +179,22 @@ export default function QualificationsSection() {
                 <h3>Key Topics Covered:</h3>
                 <ul className="modal-details-list">
                   {selectedCard.modalDetails.map((detail, i) => (
-                    <li key={i}>{detail}</li>
+                    <li key={i}>
+                      <FaCheckCircle className="modal-check-icon" />
+                      {detail}
+                    </li>
                   ))}
                 </ul>
 
                 <button className="modal-apply-btn" onClick={handleApplyNow}>
                   Apply For This Course
                 </button>
-
               </div>
             </div>
 
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Testimonials.css';
+import { FaQuoteLeft, FaStar } from 'react-icons/fa';
 
 const testimonials = [
   {
@@ -37,15 +38,33 @@ const testimonials = [
 const TestimonialsSection = () => {
   return (
     <section className="vertical-testimonial-section">
-      <div className="testimonial-container">
-        <h2 className="testimonial-heading">What Our Students Say</h2>
-        <p className="testimonial-subtitle">Hear from safety professionals worldwide who transformed their careers with OSHEQ certifications</p>
+      <div className="container testimonial-container">
         
+        {/* Header Section */}
+        <div className="section-header testimonial-header">
+          <span className="sub-heading">Success Stories</span>
+          <h2 className="testimonial-heading">What Our Students Say</h2>
+          <p className="testimonial-subtitle">
+            Hear from safety professionals worldwide who transformed their careers with OSHEQ certifications.
+          </p>
+        </div>
+        
+        {/* Testimonials Grid */}
         <div className="testimonials-grid">
           {testimonials.map((t, i) => (
             <div className="testimonial-card" key={i}>
-              <div className="quote-icon">"</div>
+              
+              <div className="card-top">
+                <FaQuoteLeft className="quote-icon" />
+                <div className="stars">
+                  {[...Array(5)].map((_, index) => (
+                    <FaStar key={index} className="star-icon" />
+                  ))}
+                </div>
+              </div>
+
               <p className="testimonial-text">{t.message}</p>
+              
               <div className="testimonial-footer">
                 <div className="testimonial-author">
                   <strong>{t.name}</strong>
@@ -60,6 +79,7 @@ const TestimonialsSection = () => {
                   {t.name.split(', ')[1] === 'Pakistan' && '🇵🇰'}
                 </div>
               </div>
+
             </div>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './FAQs.css';
+import { FaChevronDown } from 'react-icons/fa';
 
 const faqs = [
   {
@@ -73,15 +74,19 @@ const FAQs = () => {
 
   return (
     <section className="faq-section" id="faqs">
-      <div className="container">
-        <div className="faq-header">
+      <div className="container faq-main-container">
+        
+        {/* Header Section */}
+        <div className="section-header faq-header">
+          <span className="sub-heading">Got Questions?</span>
           <h2 className="faq-heading">Frequently Asked Questions</h2>
           <p className="faq-subtitle">
             Get answers to common questions about OSHEQ certifications, training programs, and accreditation processes.
           </p>
         </div>
         
-        <div className="faq-container">
+        {/* FAQs List */}
+        <div className="faq-wrapper">
           {faqs.map((faq, index) => (
             <div
               key={index}
@@ -90,8 +95,8 @@ const FAQs = () => {
             >
               <div className="faq-question">
                 <span className="question-text">{faq.question}</span>
-                <span className="faq-icon">
-                  {activeIndex === index ? '−' : '+'}
+                <span className="faq-icon-wrapper">
+                  <FaChevronDown className="faq-icon" />
                 </span>
               </div>
               <div className="faq-answer">
@@ -100,7 +105,6 @@ const FAQs = () => {
             </div>
           ))}
         </div>
-
   
       </div>
     </section>

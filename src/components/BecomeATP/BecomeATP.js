@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaUser, FaEnvelope, FaBuilding, FaPhone, FaFileUpload, FaPaperPlane } from 'react-icons/fa';
 import './BecomeATP.css';
 
 const BecomeATP = () => {
@@ -20,50 +21,51 @@ const BecomeATP = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Demo validation
     if (!form.name || !form.email || !form.organization || !form.contact || !form.document) {
       alert('Please fill out all fields.');
       return;
     }
-
-    // Simulate submission
     alert('Application submitted successfully!');
   };
 
   return (
-    <div className="become-atp-container">
-      <div className="become-atp-card">
-        <h2>Apply to Become an ATP</h2>
-        <p>Please fill out the form below to start your ATP registration process.</p>
+    <div className="atp-apply-container">
+      <div className="atp-apply-card">
+        <div className="form-header">
+          <h2>Apply to Become an ATP</h2>
+          <p>Partner with OSHEQ and deliver world-class safety training.</p>
+        </div>
 
-        <form className="become-atp-form" onSubmit={handleSubmit}>
-          <label>
-            Full Name
-            <input type="text" name="name" placeholder="Your full name" onChange={handleChange} />
-          </label>
+        <form className="atp-apply-form" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label><FaUser /> Full Name</label>
+            <input type="text" name="name" placeholder="John Doe" onChange={handleChange} required />
+          </div>
 
-          <label>
-            Email Address
-            <input type="email" name="email" placeholder="you@example.com" onChange={handleChange} />
-          </label>
+          <div className="input-group">
+            <label><FaEnvelope /> Email Address</label>
+            <input type="email" name="email" placeholder="partner@company.com" onChange={handleChange} required />
+          </div>
 
-          <label>
-            Organization
-            <input type="text" name="organization" placeholder="Your company or institute" onChange={handleChange} />
-          </label>
+          <div className="input-group">
+            <label><FaBuilding /> Organization</label>
+            <input type="text" name="organization" placeholder="Your Training Institute" onChange={handleChange} required />
+          </div>
 
-          <label>
-            Contact Number
-            <input type="tel" name="contact" placeholder="e.g. +44 7000 000000" onChange={handleChange} />
-          </label>
+          <div className="input-group">
+            <label><FaPhone /> Contact Number</label>
+            <input type="tel" name="contact" placeholder="+1 234 567 890" onChange={handleChange} required />
+          </div>
 
-          <label>
-            Upload Certification Document
-            <input type="file" name="document" onChange={handleChange} />
-          </label>
+          <div className="input-group file-group">
+            <label><FaFileUpload /> Upload Certification Document</label>
+            <input type="file" name="document" onChange={handleChange} required />
+            <small>Accepted formats: PDF, DOCX (Max 5MB)</small>
+          </div>
 
-          <button type="submit" className="submit-btn">Submit Application</button>
+          <button type="submit" className="submit-btn">
+            Submit Application <FaPaperPlane />
+          </button>
         </form>
       </div>
     </div>

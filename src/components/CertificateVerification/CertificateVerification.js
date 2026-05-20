@@ -1,63 +1,54 @@
 import React, { useState } from 'react';
-import {
-  FaCheckCircle,
-  FaTimesCircle,
-  FaUser,
-  FaHashtag,
-  FaQrcode,
-  FaEnvelope,
-  FaShieldAlt,
-  FaUniversity,
-  FaBuilding,
-  FaCalendar,
-  FaBook,
-  FaDownload,
-  FaEye,
+import { 
+  FaCheckCircle, FaTimesCircle, FaUser, FaHashtag, 
+  FaDownload, FaEye, FaShieldAlt, FaBook, FaCalendar, FaBuilding 
 } from 'react-icons/fa';
 import './CertificateVerification.css';
 
 const CertificateVerification = () => {
-  const [fullName, setFullName] = useState('');
-  const [certificateNumber, setCertificateNumber] = useState('');
+  const [formData, setFormData] = useState({ fullName: '', certificateNumber: '' });
   const [verificationResult, setVerificationResult] = useState(null);
-  const [certificateUrl, setCertificateUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // 1. View Certificate (PDF Viewer mein open karega)
+  const viewCertificate = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  // 2. Download Certificate (Blob approach - Force download)
+  const downloadCertificate = async (url, filename) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (e) {
+      window.open(url, '_blank');
+    }
+  };
 
   const handleVerify = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setVerificationResult(null);
-    setCertificateUrl('');
     setError(null);
 
     try {
-      const response = await fetch(
-        `https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(fullName)}&certificateNumber=${encodeURIComponent(certificateNumber)}`
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({
-          message: 'Certificate not found or details are incorrect.',
-        }));
-        throw new Error(errorData.message);
-      }
-
+      const response = await fetch(`https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(formData.fullName)}&certificateNumber=${encodeURIComponent(formData.certificateNumber)}`);
+      if (!response.ok) throw new Error('Certificate not found or details are incorrect.');
+      
       const data = await response.json();
-
       setVerificationResult({
-        isValid: true,
-        holderName: data.certificate.holderName,
-        certificateNumber: data.certificate.certificateNumber,
-        courseName: data.certificate.courseName,
-        issueDate: data.certificate.dateOfIssue,
-        atp: data.certificate.atp || 'OSHEQ Academy Pvt Ltd.',
+        ...data.certificate,
+        url: `https://osheq-api.vercel.app/certificates/${encodeURIComponent(formData.certificateNumber)}.pdf`
       });
-
-      // certificateNumber state ko change nahi kiya gaya
-      setCertificateUrl(
-        `https://osheq-api.vercel.app/certificates/${encodeURIComponent(certificateNumber)}.pdf`
-      );
     } catch (err) {
       setError(err.message);
     } finally {
@@ -66,224 +57,55 @@ const CertificateVerification = () => {
   };
 
   return (
-    <div className="verification-page-container">
-      <div className="header-section">
-        <div className="header-content">
-          <FaShieldAlt className="header-icon" />
-          <h1>Certificate Verification</h1>
-          <p>Ensure the authenticity of OSHEQ qualifications</p>
-        </div>
+    <section className="verify-page">
+      <div className="verify-hero">
+        <h1>Certificate Verification</h1>
+        <p>Validate the authenticity of OSHEQ credentials instantly.</p>
       </div>
 
-      <div className="content-wrapper">
-        <div className="info-section">
-          <div className="info-card">
-            <h2>About Verification</h2>
-            <p>
-              OSHEQ regularly receives requests from employers, recruitment agencies,
-              Higher Education institutions, and other organizations to confirm that
-              an individual holds a OSHEQ qualification. It is important to OSHEQ that
-              organizations can validate qualifications so that you can maintain workplace
-              safety.
-            </p>
-            <p className="warning-text">
-              We take all reports of fraudulent Certificates and Parchments very seriously,
-              and we advise all students to keep these documents secure to prevent fraud.
-            </p>
-
-            <div className="feature-grid">
-              <div className="feature-item">
-                <div className="feature-icon">
-                  <FaQrcode />
-                </div>
-                <div className="feature-content">
-                  <h3>QR Code Verification</h3>
-                  <p>
-                    All Certificates and Parchments issued by OSHEQ include a QR code that can be scanned with a smartphone to verify authenticity.
-                  </p>
-                </div>
-              </div>
-
-              <div className="feature-item">
-                <div className="feature-icon">
-                  <FaUniversity />
-                </div>
-                <div className="feature-content">
-                  <h3>Online Verification</h3>
-                  <p>
-                    Using our free self-service verification platform, you can validate all Certificates and Parchments issued by OSHEQ.
-                  </p>
-                </div>
-              </div>
-
-              <div className="feature-item">
-                <div className="feature-icon">
-                  <FaEnvelope />
-                </div>
-                <div className="feature-content">
-                  <h3>Direct Verification</h3>
-                  <p>
-                    If you have a copy of OSHEQ qualification parchment, we can verify through <strong>info@osheq.org</strong>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="form-section">
-          <div className="verification-card">
-            <div className="card-header">
-              <FaShieldAlt className="card-icon" />
-              <h2>Verify Certificate</h2>
-              <p>Enter your details to verify your OSHEQ certificate</p>
-            </div>
-
+      <div className="container verify-layout">
+        <div className="verify-form-col">
+          <div className="card">
+            <h2>Enter Details</h2>
             <form onSubmit={handleVerify}>
               <div className="input-group">
-                <label htmlFor="fullName">
-                  <FaUser className="input-icon" />
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Enter Your Name"
-                  required
-                />
+                <label><FaUser /> Full Name</label>
+                <input type="text" value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} placeholder="As per certificate" required />
               </div>
-
               <div className="input-group">
-                <label htmlFor="certificateNumber">
-                  <FaHashtag className="input-icon" />
-                  Certificate No
-                </label>
-                <input
-                  type="text"
-                  id="certificateNumber"
-                  value={certificateNumber}
-                  onChange={(e) => setCertificateNumber(e.target.value)}
-                  placeholder="Enter Your Certificate No"
-                  required
-                />
+                <label><FaHashtag /> Certificate No</label>
+                <input type="text" value={formData.certificateNumber} onChange={(e) => setFormData({...formData, certificateNumber: e.target.value})} placeholder="e.g. OSHEQ-XXXXX" required />
               </div>
-
-              <button type="submit" className="verify-button" disabled={isLoading}>
-                {isLoading ? (
-                  <>
-                    <span className="loader"></span>
-                    Verifying...
-                  </>
-                ) : (
-                  <>
-                    <FaCheckCircle className="button-icon" />
-                    Verify Certificate
-                  </>
-                )}
-              </button>
+              <button type="submit" className="verify-btn" disabled={isLoading}>{isLoading ? 'Verifying...' : 'Verify Now'}</button>
             </form>
           </div>
+        </div>
 
-          {error && (
-            <div className="result-card error">
-              <div className="result-header">
-                <FaTimesCircle className="result-icon" />
-                <h3>Verification Failed</h3>
-              </div>
-              <p>{error}</p>
-            </div>
-          )}
-
+        <div className="verify-result-col">
+          {error && <div className="status-box error"><FaTimesCircle /> {error}</div>}
           {verificationResult && (
-            <div className="result-card success">
-              <div className="result-header">
-                <FaCheckCircle className="result-icon" />
-                <h3>Certificate Verified Successfully</h3>
-              </div>
-
+            <div className="status-box success">
+              <h3><FaCheckCircle /> Verification Successful</h3>
               <div className="result-grid">
-                <div className="result-item">
-                  <FaUser className="item-icon" />
-                  <div className="item-content">
-                    <label>Full Name</label>
-                    <p>{verificationResult.holderName}</p>
-                  </div>
-                </div>
-
-                <div className="result-item">
-                  <FaHashtag className="item-icon" />
-                  <div className="item-content">
-                    <label>Certificate Number</label>
-                    <p>{verificationResult.certificateNumber}</p>
-                  </div>
-                </div>
-
-                <div className="result-item">
-                  <FaBook className="item-icon" />
-                  <div className="item-content">
-                    <label>Course Name</label>
-                    <p>{verificationResult.courseName}</p>
-                  </div>
-                </div>
-
-                <div className="result-item">
-                  <FaCalendar className="item-icon" />
-                  <div className="item-content">
-                    <label>Date of Issue</label>
-                    <p>{verificationResult.issueDate}</p>
-                  </div>
-                </div>
-
-                <div className="result-item">
-                  <FaBuilding className="item-icon" />
-                  <div className="item-content">
-                    <label>ATP</label>
-                    <p>{verificationResult.atp}</p>
-                  </div>
-                </div>
+                <p><strong>Holder:</strong> {verificationResult.holderName}</p>
+                <p><strong>Course:</strong> {verificationResult.courseName}</p>
+                <p><strong>Issue Date:</strong> {verificationResult.dateOfIssue}</p>
               </div>
-
-              {certificateUrl && (
-                <div className="certificate-preview-section">
-                  <div className="certificate-action-buttons">
-                    <a
-                      href={certificateUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="preview-btn"
-                    >
-                      <FaEye /> View Certificate
-                    </a>
-
-                    <a
-                      href={certificateUrl}
-                      download
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="download-btn"
-                    >
-                      <FaDownload /> Download Certificate
-                    </a>
-                  </div>
-
-                  <div className="certificate-preview-box">
-                    <iframe
-                      src={certificateUrl}
-                      title="Certificate Preview"
-                      width="100%"
-                      height="500px"
-                    />
-                  </div>
-                </div>
-              )}
+              
+              {/* Actions Section */}
+              <div className="certificate-action-buttons">
+                <button className="action-btn preview-btn" onClick={() => viewCertificate(verificationResult.url)}>
+                  <FaEye /> View Certificate
+                </button>
+                <button className="action-btn download-btn" onClick={() => downloadCertificate(verificationResult.url, `OSHEQ_${verificationResult.certificateNumber}.pdf`)}>
+                  <FaDownload /> Download PDF
+                </button>
+              </div>
             </div>
           )}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
-
 export default CertificateVerification;
