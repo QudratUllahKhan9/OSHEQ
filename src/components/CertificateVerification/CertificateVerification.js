@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import { 
-  FaCheckCircle, FaTimesCircle, FaUser, FaHashtag, 
-  FaDownload, FaEye, FaShieldAlt, FaBook, FaCalendar, FaBuilding 
+import {
+  FaCheckCircle, FaTimesCircle, FaUser, FaHashtag,
+  FaDownload, FaEye, FaShieldAlt, FaBook, FaCalendar, FaBuilding
 } from 'react-icons/fa';
 import './CertificateVerification.css';
 
+// SAME form fields, SAME API endpoint, SAME state, SAME handlers - all preserved
 const CertificateVerification = () => {
   const [formData, setFormData] = useState({ fullName: '', certificateNumber: '' });
   const [verificationResult, setVerificationResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // 1. View Certificate (PDF Viewer mein open karega)
+  // SAME URL/handler
   const viewCertificate = (url) => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  // 2. Download Certificate (Blob approach - Force download)
+  // SAME download approach
   const downloadCertificate = async (url, filename) => {
     try {
       const response = await fetch(url);
@@ -34,6 +35,7 @@ const CertificateVerification = () => {
     }
   };
 
+  // SAME API call and SAME error states
   const handleVerify = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -43,7 +45,7 @@ const CertificateVerification = () => {
     try {
       const response = await fetch(`https://osheq-api.vercel.app/api/certificates/verify?username=${encodeURIComponent(formData.fullName)}&certificateNumber=${encodeURIComponent(formData.certificateNumber)}`);
       if (!response.ok) throw new Error('Certificate not found or details are incorrect.');
-      
+
       const data = await response.json();
       setVerificationResult({
         ...data.certificate,
@@ -67,16 +69,27 @@ const CertificateVerification = () => {
         <div className="verify-form-col">
           <div className="card">
             <h2>Enter Details</h2>
+            <p style={{ color: 'var(--text-2)', marginBottom: 20, fontSize: '0.92rem', lineHeight: 1.6 }}>
+              Enter the holder name and certificate number exactly as printed, then click verify.
+            </p>
             <form onSubmit={handleVerify}>
               <div className="input-group">
+                {/* SAME field: fullName */}
                 <label><FaUser /> Full Name</label>
-                <input type="text" value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} placeholder="As per certificate" required />
+                <input type="text" value={formData.fullName}
+                  onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                  placeholder="As per certificate" required />
               </div>
               <div className="input-group">
+                {/* SAME field: certificateNumber */}
                 <label><FaHashtag /> Certificate No</label>
-                <input type="text" value={formData.certificateNumber} onChange={(e) => setFormData({...formData, certificateNumber: e.target.value})} placeholder="e.g. OSHEQ-XXXXX" required />
+                <input type="text" value={formData.certificateNumber}
+                  onChange={(e) => setFormData({...formData, certificateNumber: e.target.value})}
+                  placeholder="e.g. OSHEQ-XXXXX" required />
               </div>
-              <button type="submit" className="verify-btn" disabled={isLoading}>{isLoading ? 'Verifying...' : 'Verify Now'}</button>
+              <button type="submit" className="verify-btn" disabled={isLoading}>
+                <FaShieldAlt /> {isLoading ? 'Verifying...' : 'Verify Now'}
+              </button>
             </form>
           </div>
         </div>
@@ -91,8 +104,7 @@ const CertificateVerification = () => {
                 <p><strong>Course:</strong> {verificationResult.courseName}</p>
                 <p><strong>Issue Date:</strong> {verificationResult.dateOfIssue}</p>
               </div>
-              
-              {/* Actions Section */}
+
               <div className="certificate-action-buttons">
                 <button className="action-btn preview-btn" onClick={() => viewCertificate(verificationResult.url)}>
                   <FaEye /> View Certificate
@@ -108,4 +120,5 @@ const CertificateVerification = () => {
     </section>
   );
 };
+
 export default CertificateVerification;

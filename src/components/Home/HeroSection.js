@@ -1,66 +1,76 @@
 import React from 'react';
 import './HeroSection.css';
-import slider2 from './assets/slider2.png';
-import { FaArrowRight, FaGraduationCap, FaGlobeAmericas } from 'react-icons/fa';
+import { FaArrowRight, FaGraduationCap, FaGlobeAmericas, FaCheckCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 export default function HeroSection() {
   const navigate = useNavigate();
-  
-  const handleExplore = () => {
-    navigate('/qualifications');
-  };
 
   return (
-    <div className="hero-container">
-      {/* Background Decorative Elements */}
-      <div className="bg-shape shape-1"></div>
-      <div className="bg-shape shape-2"></div>
+    <section className="hero-container">
 
       <div className="hero-text">
-        <div className="hero-badge slide-in">
-          <FaGlobeAmericas className="badge-icon" />
-          <span>Global Accreditation Board</span>
-        </div>
-        
-        <h1 className="fade-in">
-          Elevate Your Safety Career with <span className="text-gradient">OSHEQ</span>
-        </h1>
-        
-        <p className="hero-subtitle slide-in">
-          Occupational Safety, Health, Environment & Quality. A premier international institute providing globally recognized certifications for safety professionals worldwide.
-        </p>
-        
-        <div className="hero-stats glass-panel slide-up">
-          <div className="hero-stat">
-            <strong>50+</strong>
-            <span>Certifications</span>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="hero-stat">
-            <strong>10k+</strong>
-            <span>Professionals</span>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="hero-stat">
-            <strong>25+</strong>
-            <span>Countries</span>
-          </div>
+        <div className="hero-eyebrow-row">
+          <span className="dot"></span>
+          <FaGlobeAmericas />
+          Founded 2007 · Safety & Quality Qualifications
         </div>
 
-        <div className="hero-buttons fade-in-delayed">
-          <button className="hero-btn primary" onClick={handleExplore}>
-            <FaGraduationCap className="btn-icon" />
-            Explore Courses
-            <FaArrowRight className="btn-icon-right" />
+        <h1>
+          Crafting <span className="accent">safer</span>
+          <br />
+          workplaces, one
+          <br />
+          credential at a time.
+        </h1>
+
+        <p className="hero-subtitle">
+          <span className="script">welcome —</span>
+          advance your career with internationally recognized certifications in
+          Occupational Safety, Health, Environment &amp; Quality Management.
+          Trusted by 10,000+ professionals across 25+ countries.
+        </p>
+
+        <div className="hero-features">
+          <span className="hero-feature"><FaCheckCircle /> Internationally Recognized</span>
+          <span className="hero-feature"><FaCheckCircle /> Career-Focused Learning</span>
+          <span className="hero-feature"><FaCheckCircle /> Industry Experts</span>
+        </div>
+
+        <div className="hero-buttons">
+          <button className="btn btn-primary" onClick={() => navigate('/Enroll')}>
+            <FaGraduationCap /> Enroll Now <FaArrowRight className="btn-arrow" />
+          </button>
+          <button className="btn btn-outline" onClick={() => navigate('/qualifications')}>
+            View Qualifications
           </button>
         </div>
+
+        <div className="hero-trust">
+          <div className="hero-trust-item"><strong>10+</strong><span>Years of Trust</span></div>
+          <div className="trust-divider"></div>
+          <div className="hero-trust-item"><strong>10K+</strong><span>Certified</span></div>
+          <div className="trust-divider"></div>
+          <div className="hero-trust-item"><strong>25+</strong><span>Countries</span></div>
+        </div>
       </div>
-      
-      <div className="hero-image zoom-in">
-        <div className="image-glow"></div>
-        <img src={slider2} alt="OSHEQ - Safety Training and Certification" className="floating-img" />
+
+      <div className="hero-visual">
+        <span className="hero-photo-label">Since 2007 ↓</span>
+        <img
+          className="hero-photo-main"
+          src={`${process.env.PUBLIC_URL}/assets/img/team-training.jpg`}
+          alt="OSHEQ training session"
+          onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = `${process.env.PUBLIC_URL}/assets/img/safety-portrait.jpg`; }}
+        />
+        <div className="hero-photo-tape">
+          <img src={`${process.env.PUBLIC_URL}/assets/img/safety-meeting.jpg`} alt="Safety team" />
+        </div>
+        <div className="editorial-quote">
+          "Safety isn't a rulebook. It's a relationship with the people you lead."
+          <div className="signature">— OSHEQ Charter, 2007</div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

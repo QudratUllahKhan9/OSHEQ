@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+function Root() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 80,
+    });
+  }, []);
+  return <App />;
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Root />
   </React.StrictMode>
 );
 

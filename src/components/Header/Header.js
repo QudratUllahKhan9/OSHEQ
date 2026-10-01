@@ -1,118 +1,155 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import logo from "./assets/img3.png";
-import { FaEnvelope, FaChevronDown, FaUserTie, FaShieldAlt } from "react-icons/fa";
+
+import {
+  FaChevronDown,
+  FaUserTie,
+  FaShieldAlt,
+} from "react-icons/fa";
+
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
   const [isAtpOpen, setIsAtpOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const location = useLocation();
 
-  // Route change hone par mobile menu automatically close ho jayega
-  useEffect(() => { 
-    setMobileMenuOpen(false); 
+  useEffect(() => {
+    setMobileMenuOpen(false);
     setIsAtpOpen(false);
-  }, [location]);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="header">
-      {/* ── Top Contact Bar ── */}
-      <div className="contact-bar">
-        <div className="container">
-          <div className="contact-info">
-            <span className="contact-badge">
-              <FaShieldAlt className="icon-shield" /> OSHA Certified
-            </span>
-            <div className="contact-divider"></div>
-            <a href="mailto:info@osheq.us">
-              <FaEnvelope className="icon" /> info@osheq.us
-            </a>
-          </div>
-        </div>
-      </div>
+    <header className={`osheq-header ${scrolled ? "scrolled" : ""}`}>
+      <div className="main-header">
+        <div className="header-container main-inner">
 
-      {/* ── Main Navigation ── */}
-      <div className="main-nav">
-        <div className="container">
-          <div className="nav-wrapper">
-            
-            {/* Logo */}
-            <Link to="/" className="logo">
-              <img src={logo} alt="OSHEQ Logo" />
+          <Link to="/" className="brand">
+            <img src={logo} alt="OSHEQ Logo" />
+            <span className="brand-name">
+              <span className="brand-l1">OSHEQ</span>
+              <span className="brand-l2">since 2007</span>
+            </span>
+          </Link>
+
+          <nav className="desktop-navigation">
+
+            <Link to="/"
+              className={location.pathname === "/" ? "nav-link active" : "nav-link"}>
+              Home
             </Link>
 
-            {/* Desktop Nav */}
-            <nav className="desktop-nav">
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/qualifications">Qualifications</Link></li>
+            <Link to="/qualifications"
+              className={location.pathname === "/qualifications" ? "nav-link active" : "nav-link"}>
+              Qualifications
+            </Link>
 
-                <li
-                  className="dropdown"
-                  onMouseEnter={() => setIsAtpOpen(true)}
-                  onMouseLeave={() => setIsAtpOpen(false)}
-                >
-                  <span className="dropdown-trigger">
-                    ATP <FaChevronDown className={`chevron ${isAtpOpen ? "open" : ""}`} />
-                  </span>
-                  {isAtpOpen && (
-                    <div className="dropdown-content">
-                      <Link to="/BecomeATP">
-                        <span className="drop-icon"><FaUserTie /></span>
-                        ATP Details
-                      </Link>
-                    </div>
-                  )}
-                </li>
-
-                <li><Link to="/about">About Us</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
-                <li><Link to="/verify">Verification</Link></li>
-                <li className="highlight"><Link to="/atp">ATP Login</Link></li>
-              </ul>
-            </nav>
-
-            {/* Mobile Toggle Button */}
-            <button
-              className="mobile-menu-btn"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
+            <div
+              className="nav-dropdown"
+              onMouseEnter={() => setIsAtpOpen(true)}
+              onMouseLeave={() => setIsAtpOpen(false)}
             >
-              {mobileMenuOpen ? <HiX size={26} /> : <HiOutlineMenuAlt3 size={26} />}
-            </button>
-          </div>
+              <button className="nav-link dropdown-button" onClick={() => setIsAtpOpen(!isAtpOpen)} aria-expanded={isAtpOpen}>
+                ATP
+                <FaChevronDown className={isAtpOpen ? "arrow rotated" : "arrow"} />
+              </button>
+
+              {isAtpOpen && (
+                <div className="atp-dropdown">
+                  <Link to="/atp" className="dropdown-item">
+                    <span className="dropdown-icon"><FaUserTie /></span>
+                    <span>
+                      <strong>ATP Login</strong>
+                      <small>Access partner portal</small>
+                    </span>
+                  </Link>
+
+                  <Link to="/register" className="dropdown-item">
+                    <span className="dropdown-icon"><FaUserTie /></span>
+                    <span>
+                      <strong>Become ATP</strong>
+                      <small>Join our network today</small>
+                    </span>
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link to="/about"
+              className={location.pathname === "/about" ? "nav-link active" : "nav-link"}>
+              About
+            </Link>
+
+            <Link to="/contact"
+              className={location.pathname === "/contact" ? "nav-link active" : "nav-link"}>
+              Contact
+            </Link>
+
+            <Link to="/verify"
+              className={location.pathname === "/verify" ? "nav-link active" : "nav-link"}>
+              Verify
+            </Link>
+
+            <Link to="/Enroll" className="nav-cta">
+              <FaShieldAlt />
+              Enroll
+            </Link>
+          </nav>
+
+          <button
+            className="mobile-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation"
+          >
+            {mobileMenuOpen ? <HiX /> : <HiOutlineMenuAlt3 />}
+          </button>
         </div>
 
-        {/* Mobile Nav */}
         {mobileMenuOpen && (
-          <nav className="mobile-nav">
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/qualifications">Qualifications</Link></li>
+          <div className="mobile-navigation">
+            <Link to="/" className="mobile-link">Home</Link>
+            <Link to="/qualifications" className="mobile-link">Qualifications</Link>
 
-              <li>
-                <button
-                  className="dropdown-trigger mobile-dropdown-btn"
-                  onClick={() => setIsAtpOpen(!isAtpOpen)}
-                >
-                  ATP <FaChevronDown className={`chevron ${isAtpOpen ? "open" : ""}`} />
-                </button>
-                {isAtpOpen && (
-                  <div className="mobile-dropdown-content">
-                    <Link to="/atp"><FaUserTie /> Login ATP</Link>
-                    <Link to="/register"><FaUserTie /> Become ATP</Link>
-                  </div>
-                )}
-              </li>
+            <button
+              className="mobile-link mobile-atp-button"
+              onClick={() => setIsAtpOpen(!isAtpOpen)}
+            >
+              <span>ATP</span>
+              <FaChevronDown className={isAtpOpen ? "arrow rotated" : "arrow"} />
+            </button>
 
-              <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/verify">Verification</Link></li>
-              <li className="highlight"><Link to="/atp">ATP Login</Link></li>
-            </ul>
-          </nav>
+            {isAtpOpen && (
+              <div className="mobile-atp-menu">
+                <Link to="/atp">
+                  <FaUserTie />
+                  <span><strong>ATP Login</strong><small>Access portal</small></span>
+                </Link>
+                <Link to="/register">
+                  <FaUserTie />
+                  <span><strong>Become ATP</strong><small>Join network</small></span>
+                </Link>
+              </div>
+            )}
+
+            <Link to="/about" className="mobile-link">About</Link>
+            <Link to="/contact" className="mobile-link">Contact</Link>
+            <Link to="/verify" className="mobile-link">Verify Certificate</Link>
+
+            <Link to="/Enroll" className="mobile-login">
+              <FaShieldAlt /> Enroll Now
+            </Link>
+          </div>
         )}
       </div>
     </header>

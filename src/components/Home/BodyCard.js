@@ -1,86 +1,65 @@
 import React from 'react';
 import './BodyCard.css';
-import { FaGraduationCap, FaCheckCircle, FaHandshake, FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 export default function BodyCard() {
   const navigate = useNavigate();
-  
-  const handleQualifications = () => {
-    navigate('/qualifications');
-  };
-
-  const handleVerification = () => {
-    navigate('/verify'); 
-  }; 
-    
-  const handleAuthorized = () => {
-    navigate('/register'); 
-  };
 
   return (
-    <div className='body-card-container'>
-      
-      {/* Qualifications Card */}
-      <div className='body-card'>
-        <div className="card-glow"></div>
-        <div className="body-card-top">
-          <div className="icon-wrapper">
-            <FaGraduationCap className='body-icon' />
+    <section className="pillars-section">
+      <div className="container">
+        <div className="pillars-header">
+          <span className="eyebrow">our three pillars</span>
+          <h2>Built on integrity, expertise and global recognition</h2>
+          <p>
+            Whether you're exploring your first qualification, verifying an existing
+            credential, or partnering as a training provider — our work is always
+            guided by these foundational pillars.
+          </p>
+        </div>
+
+        <div className="pillars-grid">
+          <div className="pillar-card">
+            <span className="pillar-number">i.</span>
+            <h3>Professional Qualifications</h3>
+            <p>
+              Comprehensive credentials for safety personnel across public and
+              private sectors — designed to reduce workplace incidents and elevate
+              professional standards worldwide.
+            </p>
+            <button className="pillar-btn" onClick={() => navigate('/qualifications')}>
+              Explore Qualifications <FaArrowRight />
+            </button>
+          </div>
+
+          <div className="pillar-card">
+            <span className="pillar-number">ii.</span>
+            <h3>Credential Verification</h3>
+            <p>
+              Quick, secure verification of any OSHEQ certificate. Employers,
+              recruiters and academic bodies can confirm authenticity in seconds
+              with our public lookup system.
+            </p>
+            <button className="pillar-btn" onClick={() => navigate('/verify')}>
+              Verify a Certificate <FaArrowRight />
+            </button>
+          </div>
+
+          <div className="pillar-card">
+            <span className="pillar-number">iii.</span>
+            <h3>Authorized Training Partner</h3>
+            <p>
+              Join our worldwide network of centers. Deliver world-class safety
+              curricula backed by the OSHEQ name and our rigorous quality
+              assurance program.
+            </p>
+            <button className="pillar-btn" onClick={() => navigate('/register')}>
+              Become an ATP <FaArrowRight />
+            </button>
           </div>
         </div>
-        <h3>Professional Qualifications</h3>
-        <p>
-          OSHEQ offers comprehensive qualifications designed to educate personnel 
-          in both public and private sectors about workplace safety and health. 
-          Our programs aim to significantly reduce incident rates globally.
-        </p>
-        <button className="card-button" onClick={handleQualifications}>
-          Explore Qualifications
-          <FaArrowRight className="btn-arrow" />
-        </button>
       </div>
-
-      {/* Verification Card */}
-      <div className='body-card'>
-        <div className="card-glow"></div>
-        <div className="body-card-top">
-          <div className="icon-wrapper">
-            <FaCheckCircle className='body-icon' />
-          </div>
-        </div>
-        <h3>Credential Verification</h3>
-        <p>
-          Verify your OSHEQ credentials quickly and securely through our advanced 
-          online system. Employers and institutions can instantly 
-          validate certifications to ensure authenticity and compliance.
-        </p>
-        <button className="card-button" onClick={handleVerification}>
-          Verify Credentials
-          <FaArrowRight className="btn-arrow" />
-        </button>
-      </div>
-
-      {/* ATP Card */}
-      <div className='body-card'>
-        <div className="card-glow"></div>
-        <div className="body-card-top">
-          <div className="icon-wrapper">
-            <FaHandshake className='body-icon' />
-          </div>
-        </div>
-        <h3>Authorized Training Partner</h3>
-        <p>
-          Partner with OSHEQ to deliver professional workplace safety training 
-          worldwide. Join our network of centers and benefit 
-          from our globally recognized curriculum and quality assurance.
-        </p>
-        <button className="card-button" onClick={handleAuthorized}>
-          Partner With Us
-          <FaArrowRight className="btn-arrow" />
-        </button>
-      </div>
-
-    </div>
+    </section>
   );
 }

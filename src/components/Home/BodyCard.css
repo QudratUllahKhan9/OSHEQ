@@ -1,218 +1,115 @@
-/* ── Container ── */
-.body-card-container {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  padding: 60px 20px 100px;
-  background-color: #f8f9fa; /* Matches the previous Body.jsx background */
+/* =========================================================
+   OSHEQ 3.0 · Three pillars (replace old BodyCard)
+   ========================================================= */
+.pillars-section {
   position: relative;
-  font-family: 'Inter', system-ui, sans-serif;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-/* ── Individual Card ── */
-.body-card {
-  width: 100%;
-  max-width: 380px;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 51, 102, 0.05);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  text-align: center;
-  padding: 40px 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  position: relative;
+  padding: 110px 0 120px;
+  background: var(--bg);
   overflow: hidden;
-  border: 1px solid rgba(0, 51, 102, 0.04);
-  z-index: 1;
 }
-
-/* Top Accent Line */
-.body-card::before {
+.pillars-section::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(135deg, #003366, #00c0ff);
-  transition: all 0.4s ease;
+  top: 80px; right: -120px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: var(--gold-400);
+  filter: blur(90px);
+  opacity: 0.4;
+}
+.pillars-header {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto 60px;
+  position: relative;
+  z-index: 2;
+}
+.pillars-header h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  line-height: 1.15;
+}
+.pillars-header p {
+  margin-top: 14px;
+  color: var(--text-2);
+  font-size: 1.05rem;
 }
 
-/* Card Hover Effects */
-.body-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 40px rgba(0, 51, 102, 0.12);
-  border-color: rgba(0, 192, 255, 0.2);
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  position: relative;
+  z-index: 2;
 }
-
-.body-card:hover::before {
-  height: 6px;
+.pillar-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line-2);
+  border-radius: 2px;
+  padding: 42px 32px 36px;
+  overflow: hidden;
+  transition: all 0.4s var(--ease);
 }
-
-/* Subtle Background Glow on Hover */
-.card-glow {
+.pillar-card::before {
+  content: '';
   position: absolute;
-  width: 150px;
-  height: 150px;
-  background: radial-gradient(circle, rgba(0, 192, 255, 0.1) 0%, rgba(255,255,255,0) 70%);
-  top: -50px;
-  right: -50px;
-  border-radius: 50%;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+  top: 0; left: 0;
+  width: 6px; height: 0;
+  background: var(--sienna-500);
+  transition: height 0.4s var(--ease);
 }
-
-.body-card:hover .card-glow {
-  opacity: 1;
+.pillar-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--sienna-500);
+  box-shadow: 0 28px 56px rgba(104,68,49, 0.14);
 }
+.pillar-card:hover::before { height: 100%; }
+.pillar-card:nth-child(2)::before { background: var(--gold-500); }
+.pillar-card:nth-child(3)::before { background: var(--forest-700); }
 
-/* ── Icons ── */
-.body-card-top {
-  margin-bottom: 25px;
+.pillar-number {
+  display: inline-block;
+  font-family: var(--font-script);
+  font-size: 1.6rem;
+  color: var(--sienna-500);
+  margin-bottom: 6px;
 }
-
-.icon-wrapper {
-  width: 85px;
-  height: 85px;
-  background: rgba(0, 51, 102, 0.04);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  transition: all 0.4s ease;
-}
-
-.body-icon {
-  font-size: 2.2rem;
-  color: #003366;
-  transition: all 0.4s ease;
-}
-
-.body-card:hover .icon-wrapper {
-  background: #003366;
-  transform: scale(1.05);
-}
-
-.body-card:hover .body-icon {
-  color: #ffffff;
-}
-
-/* ── Typography ── */
-.body-card h3 {
-  font-size: 1.4rem;
+.pillar-card:nth-child(3) .pillar-number { color: var(--forest-700); }
+.pillar-card h3 {
+  font-size: 1.55rem;
   font-weight: 700;
-  margin-bottom: 16px;
-  color: #003366;
-  line-height: 1.3;
+  color: var(--forest-900);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
 }
-
-.body-card p {
-  font-size: 0.95rem;
-  color: #6c757d;
+.pillar-card p {
+  color: var(--text-2);
+  font-size: 0.96rem;
   line-height: 1.7;
-  margin-bottom: 30px;
-  flex-grow: 1;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 1;
 }
-
-/* ── Button ── */
-.card-button {
-  background: linear-gradient(135deg, #003366 0%, #005599 100%);
-  color: white;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 50px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  display: flex;
+.pillar-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  width: 100%;
-  box-shadow: 0 4px 15px rgba(0, 51, 102, 0.15);
+  padding: 11px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--forest-800);
+  background: transparent;
+  border: 1.5px solid var(--forest-800);
+  border-radius: 2px;
+  transition: all 0.2s var(--ease);
+  position: relative;
+  z-index: 1;
+}
+.pillar-btn:hover {
+  background: var(--forest-800);
+  color: var(--gold-400);
+  transform: translateX(4px);
 }
 
-.btn-arrow {
-  transition: transform 0.3s ease;
-}
-
-.card-button:hover {
-  background: linear-gradient(135deg, #004080 0%, #0066b3 100%);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 51, 102, 0.25);
-}
-
-.card-button:hover .btn-arrow {
-  transform: translateX(5px);
-}
-
-/* ── Animations ── */
-.body-card {
-  animation: fadeSlideUp 0.8s ease forwards;
-  opacity: 0;
-}
-
-.body-card:nth-child(1) { animation-delay: 0.1s; }
-.body-card:nth-child(2) { animation-delay: 0.2s; }
-.body-card:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes fadeSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ── Responsive Design ── */
-@media (max-width: 1024px) {
-  .body-card-container {
-    gap: 25px;
-  }
-  .body-card {
-    max-width: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 768px) {
-  .body-card-container {
-    padding: 40px 20px 60px;
-  }
-  .body-card {
-    max-width: 100%;
-    padding: 35px 25px;
-  }
-}
-
-@media (max-width: 480px) {
-  .body-card-container {
-    padding: 30px 15px;
-    gap: 20px;
-  }
-  .body-card {
-    padding: 30px 20px;
-  }
-  .icon-wrapper {
-    width: 70px;
-    height: 70px;
-  }
-  .body-icon {
-    font-size: 1.8rem;
-  }
-  .body-card h3 {
-    font-size: 1.25rem;
-  }
-}
+@media (max-width: 980px) { .pillars-grid { grid-template-columns: 1fr; } }

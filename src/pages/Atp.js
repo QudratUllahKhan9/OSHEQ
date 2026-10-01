@@ -1,15 +1,5 @@
-import React from 'react'
-
-import AtpLogin from '../components/AtpLogin/AtpLogin'
-
-export default function Atp() {
-  return (
-    <div>
-   
-    <main>
-<AtpLogin/>
-    </main>
-      
-    </div>
-  )
-}
+import React from 'react';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
+import AtpLogin from '../components/AtpLogin/AtpLogin';
+export default function Atp() { return <><Header /><main><AtpLogin /></main><Footer /></>; }

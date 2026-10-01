@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { FaArrowLeft, FaChevronRight, FaCheckCircle, FaGraduationCap } from 'react-icons/fa';
+import { FaArrowLeft, FaChevronRight, FaCheckCircle, FaGraduationCap, FaUserGraduate, FaShieldAlt } from 'react-icons/fa';
 import './Qualifications.css';
+import EnrollForm from '../Enroll/EnrollForm';
 
 // --- ALL TRAINING CATEGORIES DATA ---
 const allTrainingCategories = [
@@ -272,12 +273,15 @@ const CourseDetailPage = ({ course, onBackClick }) => {
   const hasBenefits = course.tabs.benefits && course.tabs.benefits.length > 0;
   const hasExam = course.tabs.exam && course.tabs.exam.length > 0;
 
+  const handleEnrollNow = () => {
+    document.getElementById('selected-course-enrollment')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="course-detail-wrapper fadeIn">
       <div className="container">
         <button className="back-button" onClick={onBackClick}>
-          <FaArrowLeft /> Back to All Categories
-        </button>
+          <FaArrowLeft /> All qualifications</button>
 
         {/* Hero Header for Details */}
         <div className="detail-hero-card">
@@ -285,6 +289,12 @@ const CourseDetailPage = ({ course, onBackClick }) => {
             <span className="course-badge">Course Details</span>
             <h1 className="course-title">{course.name}</h1>
             <p className="course-description">{course.description}</p>
+            <div className="detail-cta-row">
+              <button className="detail-enroll-btn" onClick={handleEnrollNow}>
+                <FaShieldAlt /> Enroll in This Course <FaUserGraduate />
+              </button>
+              <span className="detail-enroll-note">Course pre-selected · Complete the form below</span>
+            </div>
           </div>
         </div>
 
@@ -336,6 +346,9 @@ const CourseDetailPage = ({ course, onBackClick }) => {
             )}
           </div>
         </div>
+        <section id="selected-course-enrollment" aria-label="Selected course enrollment">
+          <EnrollForm key={course.id} presetCourse={course.name} embedded />
+        </section>
       </div>
     </div>
   );
@@ -384,6 +397,9 @@ const Qualifications = () => {
                     <button onClick={(e) => handleCourseClick(e, course)} className="course-link">
                       <span className="course-name">{course.name}</span>
                       <FaChevronRight className="course-arrow" />
+                    </button>
+                    <button className="course-enroll-action" onClick={(e) => handleCourseClick(e, course)} aria-label={`Enroll in ${course.name}`}>
+                      <FaUserGraduate /> Select / Enroll
                     </button>
                   </li>
                 ))}

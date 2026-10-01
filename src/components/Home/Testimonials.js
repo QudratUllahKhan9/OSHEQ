@@ -1,91 +1,51 @@
 import React from 'react';
 import './Testimonials.css';
-import { FaQuoteLeft, FaStar } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 
 const testimonials = [
-  {
-    name: 'Christine C., United States',
-    date: 'June 2018',
-    message: `"I previously worked as an EHS Manager for 20 years. I had to take time off work to heal from a significant injury. Tomorrow is my first interview for a safety role in ten years. I took your courses and read a lot of your free material. It helped me refresh my expertise."`
-  },
-  {
-    name: 'James R., Canada',
-    date: 'Feb 2020',
-    message: `"Your platform is excellent! I managed to complete multiple training programs during my break and feel more confident in my return to safety management."`
-  },
-  {
-    name: 'Sana K., UAE',
-    date: 'March 2022',
-    message: `"Without your free courses, I wouldn't have been able to return to work so quickly. I appreciate the effort you put into making it accessible."`
-  },
-  {
-    name: 'Carlos M., Mexico',
-    date: 'May 2021',
-    message: `"The content is simple, updated, and practical. Perfect for someone looking to brush up or re-enter the safety industry."`
-  },
-  {
-    name: 'Fatima A., Saudi Arabia',
-    date: 'Nov 2023',
-    message: `"Clean design, interactive learning and no cost! What more can one ask for? You truly helped me get back on track."`
-  },
-  {
-    name: 'Ali R., Pakistan',
-    date: 'Jan 2024',
-    message: `"I will definitely recommend your certifications to others. This is what modern training should look like!"`
-  }
+  { name: 'Christine C.', country: 'United States', countryCode: '🇺🇸', date: 'June 2018',
+    text: '"I had been away from the field after a serious injury. OSHEQ refreshed my expertise and gave me the confidence to walk back into a safety role — and land one within ten days of returning."' },
+  { name: 'James R.', country: 'Canada', countryCode: '🇨🇦', date: 'Feb 2020',
+    text: '"The platform is excellent. I completed several programs during my break and felt ready to lead again. The instructor team genuinely cared about my progress."' },
+  { name: 'Sana K.', country: 'UAE', countryCode: '🇦🇪', date: 'March 2022',
+    text: '"Without your free courses I would not have re-entered the workforce so quickly. I appreciate the effort you put into making this accessible globally."' },
+  { name: 'Carlos M.', country: 'Mexico', countryCode: '🇲🇽', date: 'May 2021',
+    text: '"Clean design, practical content — perfect for someone refreshing their safety foundation or preparing for international relocation assignments."' },
+  { name: 'Fatima A.', country: 'Saudi Arabia', countryCode: '🇸🇦', date: 'Nov 2023',
+    text: '"What more can one ask for? Smartly designed, accessible, and taught by people who actually do the work. You helped me get back on track."' },
+  { name: 'Ali R.', country: 'Pakistan', countryCode: '🇵🇰', date: 'Jan 2024',
+    text: '"I will definitely recommend OSHEQ certifications to others. This is what modern safety training should look and feel like."' },
 ];
 
-const TestimonialsSection = () => {
+export default function Testimonials() {
   return (
-    <section className="vertical-testimonial-section">
+    <section className="testimonials-section">
       <div className="container testimonial-container">
-        
-        {/* Header Section */}
-        <div className="section-header testimonial-header">
-          <span className="sub-heading">Success Stories</span>
-          <h2 className="testimonial-heading">What Our Students Say</h2>
-          <p className="testimonial-subtitle">
-            Hear from safety professionals worldwide who transformed their careers with OSHEQ certifications.
-          </p>
+        <div className="testimonial-header">
+          <span className="eyebrow">alumni voices</span>
+          <h2>What our community says.</h2>
+          <p>Stories from OSHEQ-trained safety professionals working in 25+ countries across every major industry.</p>
         </div>
-        
-        {/* Testimonials Grid */}
+
         <div className="testimonials-grid">
           {testimonials.map((t, i) => (
             <div className="testimonial-card" key={i}>
-              
-              <div className="card-top">
-                <FaQuoteLeft className="quote-icon" />
-                <div className="stars">
-                  {[...Array(5)].map((_, index) => (
-                    <FaStar key={index} className="star-icon" />
-                  ))}
-                </div>
+              <span className="quote-mark">"</span>
+              <div className="stars-row">
+                {[...Array(5)].map((_, j) => <FaStar key={j} className="star" />)}
               </div>
-
-              <p className="testimonial-text">{t.message}</p>
-              
-              <div className="testimonial-footer">
-                <div className="testimonial-author">
+              <p className="testimonial-text">{t.text}</p>
+              <div className="testimonial-author">
+                <div className="author-info">
                   <strong>{t.name}</strong>
-                  <span>{t.date}</span>
+                  <span>{t.country} · {t.date}</span>
                 </div>
-                <div className="country-flag">
-                  {t.name.split(', ')[1] === 'United States' && '🇺🇸'}
-                  {t.name.split(', ')[1] === 'Canada' && '🇨🇦'}
-                  {t.name.split(', ')[1] === 'UAE' && '🇦🇪'}
-                  {t.name.split(', ')[1] === 'Mexico' && '🇲🇽'}
-                  {t.name.split(', ')[1] === 'Saudi Arabia' && '🇸🇦'}
-                  {t.name.split(', ')[1] === 'Pakistan' && '🇵🇰'}
-                </div>
+                <span className="author-flag">{t.countryCode}</span>
               </div>
-
             </div>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default TestimonialsSection;
+}
