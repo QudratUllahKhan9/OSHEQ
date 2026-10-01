@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaShieldAlt, FaUsers, FaGlobeAmericas, FaArrowRight } from 'react-icons/fa';
+import { FaShieldAlt, FaUsers, FaGlobeAmericas,  } from 'react-icons/fa';
 
 const ApproachPage = () => {
   return (

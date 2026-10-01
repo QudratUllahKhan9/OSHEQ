@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaShieldAlt, FaLeaf, FaChartLine, FaUsers, FaAward, FaGlobeAmericas, FaChevronDown } from 'react-icons/fa';
+import { FaShieldAlt, FaLeaf, FaChartLine, FaChevronDown } from 'react-icons/fa';
 import { MdHealthAndSafety } from 'react-icons/md';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
