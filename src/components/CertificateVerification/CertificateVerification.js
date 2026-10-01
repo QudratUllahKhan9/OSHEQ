@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   FaCheckCircle, FaTimesCircle, FaUser, FaHashtag,
-  FaDownload, FaEye, FaShieldAlt, FaBook, FaCalendar, FaBuilding
+  FaDownload, FaEye, FaShieldAlt
 } from 'react-icons/fa';
 import './CertificateVerification.css';
 

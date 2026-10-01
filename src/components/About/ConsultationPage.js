@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaUser, FaEnvelope, FaBuilding, FaPhone, FaCommentDots, FaPaperPlane } from 'react-icons/fa';
+import {FaPaperPlane } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 const ConsultationPage = () => {
