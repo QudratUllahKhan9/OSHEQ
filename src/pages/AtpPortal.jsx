@@ -4,7 +4,7 @@ import { api, atpToken } from "../api";
 import "./atp.css";
 
 export default function AtpPortal() {
-  const nav = useNavigate();
+
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
