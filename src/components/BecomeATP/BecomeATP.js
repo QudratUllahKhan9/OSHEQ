@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
   FaUser,
   FaEnvelope,
@@ -20,6 +21,7 @@ const BecomeATP = () => {
     contact: '',
   });
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -32,6 +34,7 @@ const BecomeATP = () => {
     setSuccess(false);
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -42,6 +45,7 @@ const BecomeATP = () => {
       !form.contact.trim()
     ) {
       setFeedback('Please complete every field.');
+      setSuccess(false);
       return;
     }
 
@@ -54,7 +58,10 @@ const BecomeATP = () => {
 
   return (
     <div className="atp-apply-container">
+
       <div className="atp-apply-card">
+
+        {/* HEADER */}
 
         <div className="form-header">
           <span className="eyebrow">
@@ -68,11 +75,15 @@ const BecomeATP = () => {
           </p>
         </div>
 
+        {/* STEPS */}
+
         <div className="partner-steps">
           <span>01 · Your details</span>
           <span>02 · Organization</span>
           <span>03 · Application</span>
         </div>
+
+        {/* FEEDBACK */}
 
         {feedback && (
           <div
@@ -85,12 +96,14 @@ const BecomeATP = () => {
           </div>
         )}
 
+        {/* FORM */}
+
         <form
           className="atp-apply-form"
           onSubmit={handleSubmit}
         >
 
-          {/* FULL NAME */}
+          {/* NAME */}
 
           <div className="input-group">
             <label>
@@ -141,7 +154,7 @@ const BecomeATP = () => {
             />
           </div>
 
-          {/* CONTACT NUMBER */}
+          {/* CONTACT */}
 
           <div className="input-group">
             <label>
@@ -158,7 +171,7 @@ const BecomeATP = () => {
             />
           </div>
 
-          {/* SUBMIT BUTTON */}
+          {/* SUBMIT */}
 
           <button
             type="submit"
@@ -168,7 +181,9 @@ const BecomeATP = () => {
           </button>
 
         </form>
+
       </div>
+
     </div>
   );
 };
