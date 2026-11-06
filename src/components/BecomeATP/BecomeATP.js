@@ -63,11 +63,9 @@ const BecomeATP = () => {
             <input type="tel" name="contact" placeholder="+1 234 567 890" onChange={handleChange} required />
           </div>
           {/* FIELD: document (file upload) */}
-          // <div className="input-group file-group">
-          //   <label><FaFileUpload /> Upload Certification Document</label>
-          //   <input type="file" name="document" accept=".pdf,.docx" onChange={handleChange} required />
-          //   <small>Accepted formats: PDF, DOCX (Max 5MB)</small>
-          // </div>
+         <div className="input-group file-group">
+         
+           </div>
 
           <button type="submit" className="submit-btn">
             Review Application <FaPaperPlane />
