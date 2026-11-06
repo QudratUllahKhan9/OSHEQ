@@ -1,75 +1,172 @@
 import React, { useState } from 'react';
-import { FaUser, FaEnvelope, FaBuilding, FaPhone, FaFileUpload, FaPaperPlane } from 'react-icons/fa';
+import {
+  FaUser,
+  FaEnvelope,
+  FaBuilding,
+  FaPhone,
+  FaPaperPlane
+} from 'react-icons/fa';
+
 import './BecomeATP.css';
 
-// SAME form & SAME handler logic - all field names preserved exactly
 const BecomeATP = () => {
   const [feedback, setFeedback] = useState('');
   const [success, setSuccess] = useState(false);
+
   const [form, setForm] = useState({
-    name: '', email: '', organization: '', contact: '', document: null,
+    name: '',
+    email: '',
+    organization: '',
+    contact: '',
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setForm({ ...form, [name]: files ? files[0] : value });
+    const { name, value } = e.target;
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setFeedback('');
+    setSuccess(false);
   };
 
-  // SAME validation & SAME alert-based submit behavior preserved
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.organization || !form.contact || !form.document) {
-      setFeedback('Please complete every field and attach a document.');
+
+    if (
+      !form.name.trim() ||
+      !form.email.trim() ||
+      !form.organization.trim() ||
+      !form.contact.trim()
+    ) {
+      setFeedback('Please complete every field.');
       return;
     }
-    if (!/\.(pdf|docx)$/i.test(form.document.name) || form.document.size > 5 * 1024 * 1024) {
-      setFeedback('Upload a PDF or DOCX document smaller than 5 MB.'); return;
-    }
-    setFeedback('Your application passed validation. This preview does not transmit documents; connect the partner application API before launch.');
+
+    setFeedback(
+      'Your application has passed validation. Connect the partner application API to submit it.'
+    );
+
     setSuccess(true);
   };
 
   return (
     <div className="atp-apply-container">
       <div className="atp-apply-card">
+
         <div className="form-header">
-          <span className="eyebrow">GROW WITH OSHEQ</span>
+          <span className="eyebrow">
+            GROW WITH OSHEQ
+          </span>
+
           <h2>Apply to Become an ATP</h2>
-          <p>Partner with OSHEQ and deliver world-class safety training.</p>
+
+          <p>
+            Partner with OSHEQ and deliver world-class safety training.
+          </p>
         </div>
 
-        <div className="partner-steps"><span>01 · Your details</span><span>02 · Organization</span><span>03 · Credentials</span></div>
-        <p className="demo-note">Partner application preview · document validation only. No upload is sent to a server.</p>
-        {feedback && <div role={success ? 'status' : 'alert'} className={`form-feedback ${success ? '' : 'error-feedback'}`}>{feedback}</div>}
-        <form className="atp-apply-form" onSubmit={handleSubmit}>
-          {/* FIELD: name */}
-          <div className="input-group">
-            <label><FaUser /> Full Name</label>
-            <input type="text" name="name" placeholder="John Doe" onChange={handleChange} required />
-          </div>
-          {/* FIELD: email */}
-          <div className="input-group">
-            <label><FaEnvelope /> Email Address</label>
-            <input type="email" name="email" placeholder="partner@company.com" onChange={handleChange} required />
-          </div>
-          {/* FIELD: organization */}
-          <div className="input-group">
-            <label><FaBuilding /> Organization</label>
-            <input type="text" name="organization" placeholder="Your Training Institute" onChange={handleChange} required />
-          </div>
-          {/* FIELD: contact */}
-          <div className="input-group">
-            <label><FaPhone /> Contact Number</label>
-            <input type="tel" name="contact" placeholder="+1 234 567 890" onChange={handleChange} required />
-          </div>
-          {/* FIELD: document (file upload) */}
-         <div className="input-group file-group">
-         
-           </div>
+        <div className="partner-steps">
+          <span>01 · Your details</span>
+          <span>02 · Organization</span>
+          <span>03 · Application</span>
+        </div>
 
-          <button type="submit" className="submit-btn">
+        {feedback && (
+          <div
+            role={success ? 'status' : 'alert'}
+            className={`form-feedback ${
+              success ? '' : 'error-feedback'
+            }`}
+          >
+            {feedback}
+          </div>
+        )}
+
+        <form
+          className="atp-apply-form"
+          onSubmit={handleSubmit}
+        >
+
+          {/* FULL NAME */}
+
+          <div className="input-group">
+            <label>
+              <FaUser /> Full Name
+            </label>
+
+            <input
+              type="text"
+              name="name"
+              placeholder="John Doe"
+              value={form.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* EMAIL */}
+
+          <div className="input-group">
+            <label>
+              <FaEnvelope /> Email Address
+            </label>
+
+            <input
+              type="email"
+              name="email"
+              placeholder="partner@company.com"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* ORGANIZATION */}
+
+          <div className="input-group">
+            <label>
+              <FaBuilding /> Organization
+            </label>
+
+            <input
+              type="text"
+              name="organization"
+              placeholder="Your Training Institute"
+              value={form.organization}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* CONTACT NUMBER */}
+
+          <div className="input-group">
+            <label>
+              <FaPhone /> Contact Number
+            </label>
+
+            <input
+              type="tel"
+              name="contact"
+              placeholder="+1 234 567 890"
+              value={form.contact}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* SUBMIT BUTTON */}
+
+          <button
+            type="submit"
+            className="submit-btn"
+          >
             Review Application <FaPaperPlane />
           </button>
+
         </form>
       </div>
     </div>
