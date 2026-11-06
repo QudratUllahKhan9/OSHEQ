@@ -9,8 +9,10 @@ import Enroll from './pages/Enroll';
 import QualificationsPage from './pages/QualificationsPage';
 import ConsultationPage from './components/About/ConsultationPage';
 import ApproachPage from './components/About/ApproachPage';
+import AtpApply from './pages/AtpApply';
+import AtpPortal from './pages/AtpPortal';
+import AdminPanel from './pages/AdminPanel';
 import ScrollToTop from "./ScrollToTop";
-
 
 import './unified-theme.css';
 
@@ -20,6 +22,10 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/atp" element={<Atp />} />
+        <Route path="/atp/login" element={<AtpPortal />} />
+        <Route path="/atp/portal" element={<AtpPortal />} />
+        <Route path="/become-atp" element={<AtpApply />} />
+        <Route path="/admin" element={<AdminPanel />} />
         <Route path="/BecomeATP" element={<Register />} />
 
         <Route path="/" element={<Home />} />
